@@ -1,0 +1,145 @@
+.cause-card__top {
+  @apply relative block w-full border pt-[50px] pb-[29px] px-10 rounded-br-lg rounded-bl-lg border-t-0 border-solid border-[#eae5e3];
+}
+
+.cause-card__image img {
+  @apply w-full rounded-t-lg;
+}
+
+.cause-details__organizer {
+  @apply bg-[#f1f1f1] relative mb-[30px] pl-[108px] pr-[30px] py-[30px] rounded-[15px];
+}
+
+.cause-details__donations {
+  @apply bg-[#f1f1f1] relative pt-[30px] pb-2.5 px-[30px] rounded-[15px];
+}
+
+@media (min-width: 768px) .cause-details__organizer {
+  padding: 50px 50px 50px 128px;
+}
+
+
+
+@media (min-width: 768px) .cause-details__donations {
+  padding: 50px 50px 30px;
+}
+
+@media (min-width: 768px) .cause-details__organizer>img {
+  left: 50px;
+  top: 50px;
+}
+
+.cause-details__organizer>img {
+  @apply absolute rounded-[50%] left-[30px] top-[30px];
+}
+
+.p {
+  @apply text-[13px] font-medium leading-none text-[#ed4b4b] m-0;
+}
+
+.cause-details__organizer h3 {
+  @apply text-[#7e7e7e] text-lg leading-none font-medium mt-3.5 mb-6 mx-0;
+  font-family: "Jost", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 14px 0px 24px
+}
+
+.cause-details__organizer h3 strong {
+  font-weight: 500;
+  color: black
+}
+
+.cause-details__donations-list li {
+  @apply relative py-5 pl-40;
+  padding-top: 20px;
+  padding-bottom: 20px
+}
+
+.cause-details__donations-list li p {
+  @apply text-[#ed4b4b] font-bold leading-none relative z-10 m-0;
+  font-family: "Libre Baskerville", serif;
+  font-size: 18px;
+}
+
+
+.cause-details__donations-title {
+  @apply text-xl font-bold text-[#242323] leading-none mt-0 mb-2 mx-0;
+  font-family: "Libre Baskerville", serif;
+  font-size: 20px
+}
+
+.cause-details__donations-list li>img {
+  @apply absolute z-10 rounded-[50%] left-0 top-5;
+}
+
+@media (min-width: 768px) .cause-details__donations-list li:before {
+  width: calc(100% + 70px);
+}
+
+.cause-details__donations-list li:before {
+  @apply content-[""] w-[calc(100%_+_40px)] absolute -translate-x-2/4 h-full bg-white opacity-0 invisible transition-all duration-[0.5s] ease-[ease] rounded-[15px] left-2/4 top-0;
+}
+
+.cause-details__donations-list li h3 {
+  @apply text-[black] text-base font-bold leading-none relative z-10 mt-[13px] mb-0.5 mx-0;
+  font-size: 16px;
+  font-weight: 700
+}
+
+.cause-details__donations-list li h3 span {
+  @apply text-sm font-medium text-[#5366c2];
+  font-family: "Jost", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+
+.cause-details__content h3 {
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: -.04em;
+  margin: 10px 0 15px;
+}
+
+.pb-40 {
+  @apply pb-10;
+}
+
+.pt-120 {
+  @apply pt-[120px];
+}
+
+.as-share-nav {
+  float: right;
+}
+
+.as-share-nav li {
+  float: left;
+  list-style: none;
+  margin-left: 7px;
+}
+
+li {
+  line-height: 28px;
+}
+
+.as-share-nav li a {
+  float: left;
+  padding: 9px 12px 9px;
+  color: #000;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+}
