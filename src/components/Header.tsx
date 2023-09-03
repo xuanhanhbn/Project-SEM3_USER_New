@@ -8,6 +8,7 @@ import { Dropdown, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons"
 import type { MenuProps } from 'antd';
 import { items } from "./type";
+import useGlobalStore from "store/globalStore";
 
 export interface SelectedRoute {
   path: string;
@@ -20,7 +21,10 @@ const Header = () => {
 
   // STATE
   const [isLogin, setIsLogin] = useState<boolean>(false);
+  const userInfo = useGlobalStore((state) => state.userInfo);
+  const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
 
+console.log('userInfo: ',userInfo);
 
 
   const routeArr: SelectedRoute[] = [
@@ -80,6 +84,7 @@ const Header = () => {
     // Click vao Logout
     if(config.key === '2') {
         localStorage.removeItem('loginData')
+        updateUserInfoData(null)
         return setIsLogin(false)
     }
   }

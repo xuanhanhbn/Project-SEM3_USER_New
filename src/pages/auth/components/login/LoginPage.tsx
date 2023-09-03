@@ -30,7 +30,7 @@ import { requestLogin } from "./type";
 import { notify } from "utils/common";
 import { Spin } from "antd";
 import { useMutation } from "@tanstack/react-query";
-import { onLoginApi } from "./api";
+import { getUserInfo, onLoginApi } from "./api";
 
 // Styled component for the form
 const Form = styled("form")(({ theme }) => ({
@@ -41,7 +41,7 @@ const Form = styled("form")(({ theme }) => ({
 }));
 
 const LoginPage = () => {
-
+const history = useHistory()
   // ** State
   const [values, setValues] = useState({
     password: "",
@@ -76,9 +76,22 @@ const LoginPage = () => {
     onSuccess: (data) => {
       if (data && data.status === 200) {
         console.log("data: ", data);
-
+        onGetUserInfo()
         notify("Login Success", "success");
         localStorage.setItem("loginData", data.token);
+      } else {
+        notify("An error occurred, please try again.", "error");
+      }
+    },
+    onError: () => {
+      notify("An error occurred, please try again.", "error");
+    },
+  });
+
+  const { mutate: onGetUserInfo } = useMutation(getUserInfo, {
+    onSuccess: (data) => {
+      if (data && data.status === 200) {
+        history.push('/')
       } else {
         notify("An error occurred, please try again.", "error");
       }

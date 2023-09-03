@@ -4,12 +4,6 @@ import baseApiAuth from 'utils/baseApiAuth'
 import baseApiDefault from 'utils/baseApi'
 import { AxiosResponse } from 'axios';
 
-// const getLoginDataApi = { login(data: requestLogin): Promise<responseLogin> {
-//     const url = '/User/login';
-//     return axiosClient.post(url, data);
-//   },
-// };
-
 export const onLoginApi = (data:requestLogin): Promise<responseLogin> => {
     const url = "User/login";
     return new Promise((resolve, reject) =>
@@ -30,4 +24,3 @@ export const onLoginApi = (data:requestLogin): Promise<responseLogin> => {
     );
   };
 
-// export default getLoginDataApi;

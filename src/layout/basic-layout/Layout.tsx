@@ -3,10 +3,8 @@ import React, { Suspense, useState } from "react";
 import { renderRoutes } from "react-router-config";
 import { DashBoardProps } from "lib/interfaces";
 import Header from "components/Header";
-import Login from "pages/auth/Login";
 import { Link, useHistory } from "react-router-dom";
 import Footer from "components/Footer";
-import routes from "routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -26,7 +24,7 @@ const Layout: React.FC<DashBoardProps> = ({ route }) => {
   return (
     <Container maxWidth="xl" style={{ padding: 0 }}>
       <Suspense fallback={<LinearProgress />}>
-        {location.pathname !== "/login" && location.pathname !== "/signup" && <Header />}
+        {location.pathname !== "/login" && location.pathname !== "/signup" && location.pathname !== '/forgotpassword' && <Header />}
         <ToastContainer />
 
         {renderRoutes(route?.routes)}
