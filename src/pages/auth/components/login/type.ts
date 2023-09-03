@@ -3,8 +3,20 @@ export interface responseLogin {
   status: number;
 }
 
+export interface responseUserInfo {
+  data: {
+    id: string;
+    email: string;
+    fullName: string;
+    dateOfBirth: string;
+    profilePictureId: string;
+    roles: string[];
+  }
+  status:number
+}
 
 export interface requestLogin {
-  userName: string;
+  [x: string]: any;
+  identifier: string;
   password: string;
 }

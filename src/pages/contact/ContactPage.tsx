@@ -9,8 +9,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 
 import { requestContact } from "./type";
-import { useAppDispatch } from "store/hook";
-import { contactActions } from "./contactSlice";
 
 import {
   DataRequestInput,
@@ -20,7 +18,6 @@ import {
 } from "./constants";
 
 function ContactPage() {
-  const dispatch = useAppDispatch();
 
   const {
     handleSubmit,
@@ -39,7 +36,6 @@ function ContactPage() {
   });
 
   const onSubmit = (data: requestContact) => {
-    dispatch(contactActions.onContact(data));
   };
 
   // render input

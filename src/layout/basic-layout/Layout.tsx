@@ -4,11 +4,18 @@ import { renderRoutes } from "react-router-config";
 import { DashBoardProps } from "lib/interfaces";
 import Header from "components/Header";
 import Login from "pages/auth/Login";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Footer from "components/Footer";
 import routes from "routes";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Layout: React.FC<DashBoardProps> = ({ route }) => {
+  const history = useHistory();
+
+  const { location } = history;
+
   // TODO: force user to login
   // const [token, setToken] = useState();
 
@@ -19,10 +26,11 @@ const Layout: React.FC<DashBoardProps> = ({ route }) => {
   return (
     <Container maxWidth="xl" style={{ padding: 0 }}>
       <Suspense fallback={<LinearProgress />}>
-        
-        <Header />
+        {location.pathname !== "/login" && location.pathname !== "/signup" && <Header />}
+        <ToastContainer />
+
         {renderRoutes(route?.routes)}
-        <Footer />
+         <Footer />
       </Suspense>
     </Container>
   );
