@@ -207,7 +207,7 @@ const history = useHistory()
                 fontSize={24}
                 fontWeight={700}
               >
-                Sign In
+                Login
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -228,7 +228,7 @@ const history = useHistory()
                 </Typography>
                 <Typography variant="h5">
                   <Link style={{ color: "#e83e8c" }} to="/signup">
-                    Sign up
+                    Login
                   </Link>
                 </Typography>
               </Grid>
@@ -241,7 +241,7 @@ const history = useHistory()
                   sx={{ width: "100%" }}
                   onClick={handleSubmit(onSubmit)}
                 >
-                  {isLoading ? <Spin spinning={isLoading} /> : "Sign in"}
+                  {isLoading ? <Spin spinning={isLoading} /> : "Login"}
                 </Button>
               </Grid>
             </Grid>

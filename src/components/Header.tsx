@@ -24,7 +24,7 @@ const Header = () => {
   const userInfo = useGlobalStore((state) => state.userInfo);
   const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
 
-console.log('userInfo: ',userInfo);
+// console.log('userInfo: ',userInfo);
 
 
   const routeArr: SelectedRoute[] = [

@@ -14,6 +14,8 @@ baseInstance.interceptors.request.use(
       const getLoginData = await localStorage.getItem('loginData')
       if (getLoginData !== undefined && config.headers) {
         config.headers.Authorization = `Bearer ${getLoginData}`
+      } else {
+        return
       }
     } catch (error) {
       config.validateStatus = status => status < 500
@@ -23,38 +25,5 @@ baseInstance.interceptors.request.use(
 )
 
 baseInstance.defaults.timeout = 60000
-
-// baseInstance.interceptors.response.use(
-//   response => {
-//     // console.log('====================================');
-//     // console.log('RESPONSE', response);
-//     // console.log('====================================');
-//     return response
-//   },
-//   async error => {
-//     // console.log('====================================');
-//     // console.log('error', error);
-//     // console.log('====================================');
-//     const originalRequest = error.config
-//     if (error.response.status === 401 && !originalRequest.retry) {
-//       originalRequest.retry = true
-//       const loginData = await localStorage.getItem('loginPage')
-
-//       const response = await refreshAccessToken(refreshToken)
-//       if (response && response.data && response.data.access_token) {
-//         // console.log('response success', response);
-
-//         axios.defaults.headers.common.Authorization = `Bearer ${response.data.access_token}`
-//         await localStorage.setItem('loginPage', JSON.stringify(response.data))
-
-//         return baseInstance(originalRequest)
-//       } else {
-//         eventEmitter.emit('reset')
-//       }
-//     }
-
-//     return Promise.reject(error)
-//   }
-// )
 
 export default baseInstance

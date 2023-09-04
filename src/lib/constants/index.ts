@@ -15,5 +15,9 @@ export const paths = {
   forgotpassword: '/forgotpassword',
   changepassword: '/changepassword',
   volunteer: '/volunteer',
-  causes: '/causes'
+  causes: '/causes',
+  activeCode:'/forgot-password/active-code',
+  resetPassword:'/forgot-password/reset-password',
+  resetSuccess: '/forgot-password/success'
+
 };

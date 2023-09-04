@@ -89,7 +89,7 @@ const SignUpPage = () => {
   } = useMutation(registerApi, {
     onSuccess: (data) => {
       if (data && data.status === 200) {
-        notify('Register Success','success')
+        notify('Login Success','success')
       } else {
         notify('An error occurred, please try again.','error')
       }
@@ -223,7 +223,7 @@ const SignUpPage = () => {
                 fontSize={24}
                 fontWeight={700}
               >
-                Sign up
+                Register
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -263,7 +263,7 @@ const SignUpPage = () => {
                 </Typography>
                 <Typography variant="h5">
                   <Link style={{ color: "#e83e8c" }} to="/login">
-                    Sign in
+                    Login
                   </Link>
                 </Typography>
               </Grid>

@@ -1,8 +1,8 @@
-import { requestForgotPassword, responseForgotPassword } from "./type";
 import baseApiDefault from 'utils/baseApi'
 import { AxiosResponse } from "axios";
+import { requestInput, responseInput } from './type';
 
-export const forgotPasswordApi = (data:requestForgotPassword): Promise<responseForgotPassword> => {
+export const onCheckActiveCodeApi = (data:requestInput): Promise<responseInput> => {
   const url = "/User/forgot-password";
   return new Promise((resolve, reject) =>
   baseApiDefault
