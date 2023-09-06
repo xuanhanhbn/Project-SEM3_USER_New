@@ -1,14 +1,15 @@
-import axiosClient from "utils/baseApiNoAuth";
-import {
-  responseDataPartnersList,
-  responsePartnersList,
-} from "pages/ourpartner/type";
+import baseApiAuth from "utils/baseApiAuth";
+import { Partner } from "types/global";
+import { responsePartnersList } from "./type";
 
-const getPartnerDataApi = {
-  getPartner(): Promise<responsePartnersList<responseDataPartnersList>> {
-    const url = "/partner";
-    return axiosClient.get(url);
-  },
+export const onGetListPartnerApi = (): Promise<
+  responsePartnersList<Partner>
+> => {
+  const url = "Partner?page=0&size=4";
+  return new Promise((resolve, reject) =>
+    baseApiAuth
+      .get(url)
+      .then((res: any) => resolve(res))
+      .catch((err: Error) => reject(err))
+  );
 };
-
-export default getPartnerDataApi;
