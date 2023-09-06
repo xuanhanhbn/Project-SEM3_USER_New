@@ -17,9 +17,9 @@ export const onLoginApi = (data:requestLogin): Promise<responseLogin> => {
   export const getUserInfo = (): Promise<responseUserInfo> => {
     const url = "/User/me";
     return new Promise((resolve, reject) =>
-    baseApiDefault
+    baseApiAuth
         .get(url)
-        .then((res: AxiosResponse) => resolve(res?.data))
+        .then((res:any) => resolve(res))
         .catch((err: Error) => reject(err))
     );
   };

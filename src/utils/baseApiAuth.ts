@@ -16,6 +16,11 @@ const api = axios.create({
 const onRequest = async (
   config: AxiosRequestConfig,
 ): Promise<AxiosRequestConfig> => {
+  const getLoginData = await localStorage.getItem('loginData')
+
+  if(getLoginData && config.headers) {
+    config.headers.Authorization = `Bearer ${getLoginData}`
+  }
   return config;
 };
 

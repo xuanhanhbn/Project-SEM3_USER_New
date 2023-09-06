@@ -26,7 +26,7 @@ import {
 } from "./constants";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { requestRegister } from "./type";
 
@@ -47,7 +47,7 @@ const Form = styled("form")(({ theme }) => ({
 
 
 const SignUpPage = () => {
-
+const history = useHistory()
   // ** State
   const [values, setValues] = useState({
     password: "",
@@ -68,7 +68,7 @@ const SignUpPage = () => {
       email: "",
       dateOfBirth: "",
       fullName: "",
-      roles: "user",
+      // roles: ["user"],
     },
     resolver: yupResolver(validationSchema),
   });
@@ -89,24 +89,23 @@ const SignUpPage = () => {
   } = useMutation(registerApi, {
     onSuccess: (data) => {
       if (data && data.status === 200) {
-        notify('Login Success','success')
+        notify('Register Success','success')
+        history.push('/login')
       } else {
         notify('An error occurred, please try again.','error')
       }
     },
     onError: () => {
       notify('An error occurred, please try again.','error')
-
     }
   });
 
   const onSubmit = (data: requestRegister):void => {
     const newDataRequest = {
       ...data,
-      dateOfBirth: moment(data.dateOfBirth).format("YYYY-MM-DD")
+      dateOfBirth: moment(data.dateOfBirth).format("YYYY-MM-DD"),
+      roles:['user']
     }
-    // data.dateOfBirth = moment(data.payload.dateOfBirth).format("YYYY-MM-DD");
-    // dispatch(registerActions.onRegister(newDataRequest));
     onRegister(newDataRequest)
   };
 

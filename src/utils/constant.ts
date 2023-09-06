@@ -1,1 +1,1 @@
-export const baseApi = `https://eproject3.azurewebsites.net/api`;
+export const baseApi = `https://sem3eproj.azurewebsites.net/api`;

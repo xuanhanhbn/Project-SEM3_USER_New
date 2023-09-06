@@ -12,6 +12,8 @@ baseInstance.interceptors.request.use(
   async config => {
     try {
       const getLoginData = await localStorage.getItem('loginData')
+      console.log('getLoginData: ',getLoginData);
+
       if (getLoginData !== undefined && config.headers) {
         config.headers.Authorization = `Bearer ${getLoginData}`
       } else {

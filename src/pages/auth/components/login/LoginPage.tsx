@@ -31,6 +31,7 @@ import { notify } from "utils/common";
 import { Spin } from "antd";
 import { useMutation } from "@tanstack/react-query";
 import { getUserInfo, onLoginApi } from "./api";
+import useGlobalStore from "store/globalStore";
 
 // Styled component for the form
 const Form = styled("form")(({ theme }) => ({
@@ -42,6 +43,8 @@ const Form = styled("form")(({ theme }) => ({
 
 const LoginPage = () => {
 const history = useHistory()
+const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
+
   // ** State
   const [values, setValues] = useState({
     password: "",
@@ -74,8 +77,7 @@ const history = useHistory()
   // Call api
   const { mutate: onLogin, isLoading } = useMutation(onLoginApi, {
     onSuccess: (data) => {
-      if (data && data.status === 200) {
-        console.log("data: ", data);
+      if (data && data.token) {
         onGetUserInfo()
         notify("Login Success", "success");
         localStorage.setItem("loginData", data.token);
@@ -89,8 +91,9 @@ const history = useHistory()
   });
 
   const { mutate: onGetUserInfo } = useMutation(getUserInfo, {
-    onSuccess: (data) => {
+    onSuccess:async (data) => {
       if (data && data.status === 200) {
+        await updateUserInfoData(data?.data);
         history.push('/')
       } else {
         notify("An error occurred, please try again.", "error");

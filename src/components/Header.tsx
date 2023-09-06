@@ -24,7 +24,6 @@ const Header = () => {
   const userInfo = useGlobalStore((state) => state.userInfo);
   const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
 
-// console.log('userInfo: ',userInfo);
 
 
   const routeArr: SelectedRoute[] = [
@@ -194,7 +193,7 @@ const Header = () => {
 
           <div className="collapse navbar-collapse" id="ftco-nav">
             <ul className="ml-auto navbar-nav">{listItems}</ul>
-            {isLogin && (
+            {userInfo && (
               <div className="d-flex justify-content-center align-items-center">
                 <div className="mr-2 text-white">Welcome</div>
                 <div>
@@ -202,7 +201,7 @@ const Header = () => {
                    }} trigger={["click"]}>
                     <a onClick={(e) => e.preventDefault()}>
                       <Space style={{color:'#fd645b',fontWeight:700,fontSize:16}}>
-                        Ten User
+                        {userInfo?.fullName}
                         <DownOutlined />
                       </Space>
                     </a>
@@ -210,7 +209,7 @@ const Header = () => {
                 </div>
               </div>
             )}
-            {!isLogin && (
+            {!userInfo && (
               <div className="dropdown">
                 <button
                   className="btn btn-secondary"
