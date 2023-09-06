@@ -4,13 +4,9 @@ import "./style.css";
 
 // ** MUI Imports
 import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
+
 import { styled } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
 import CardHeader from "@mui/material/CardHeader";
-import Typography from "@mui/material/Typography";
 import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import CardContent from "@mui/material/CardContent";
@@ -27,16 +23,46 @@ import {
 } from "./constants";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
 
 import { requestRegister } from "./type";
 import { useAppDispatch } from "store/hook";
 import { registerActions } from "./registerSlice";
 
-import type { DatePickerProps } from "antd";
-import { DatePicker, Space } from "antd";
-import Moment from "react-moment";
-import moment from "moment";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import Moment from "react-moment";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
+import { Link } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+// import moment from "moment";
+
+function Copyright(props: any) {
+  return (
+    <Typography color="text.secondary" align="center" {...props}>
+      {"Copyright © "}
+      <Link color="inherit" to="https://mui.com/">
+        Your Website
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+// TODO remove, this demo shouldn't need to reset the theme.
+const defaultTheme = createTheme();
 
 // Styled component for the form
 const Form = styled("form")(({ theme }) => ({
@@ -105,7 +131,7 @@ const SignUpPage = () => {
   };
 
   const onSubmit = (data: requestRegister) => {
-    data.dateOfBirth = moment(data.dateOfBirth).format("YYYY-MM-DD");
+    // data.dateOfBirth = moment(data.dateOfBirth).format("YYYY-MM-DD");
     dispatch(registerActions.onRegister(data));
   };
 
@@ -199,83 +225,230 @@ const SignUpPage = () => {
   };
 
   return (
-    <Card>
-      <CardContent
-        sx={{
-          minHeight: 500,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Form onSubmit={(e) => e.preventDefault()}>
-          <Grid container spacing={5}>
-            <Grid item xs={12}>
-              <Typography
-                className="justify-content-around d-flex"
-                variant="h5"
-                fontSize={24}
-                fontWeight={700}
-              >
-                Sign up
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              {inputLogin.map((input) => (
-                <div key={input.field}>{renderInput(input)}</div>
-              ))}
-
-              <Controller
-                name="dateOfBirth"
-                control={control}
-                render={({ field: { onChange, value } }) => {
-                  return (
-                    <div style={{ marginBottom: 20, marginTop: 20 }}>
-                      <Space>
-                        <DatePicker
-                          placeholder="Birth date"
-                          showToday={false}
+    <ThemeProvider theme={defaultTheme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 3 }}>
+            <Grid className="input-signup" container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <Controller
+                  name="fullName"
+                  control={control}
+                  render={({ field: { onChange, value } }) => {
+                    return (
+                      <div>
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          id="fullName"
+                          label="Full Name"
                           onChange={onChange}
+                          value={value}
+                          placeholder="Carter Leonard"
+                          autoFocus
                         />
-                      </Space>
-                    </div>
-                  );
-                }}
-              />
-
-              <Grid
-                className="justify-content-around d-flex"
-                style={{ margin: "20px 0px" }}
-                item
-                xs={12}
-              >
-                <Typography variant="h5">
-                  <Link style={{ color: "#e83e8c" }} to="/forgotpassword">
-                    Forgot password?
-                  </Link>
-                </Typography>
-                <Typography variant="h5">
-                  <Link style={{ color: "#e83e8c" }} to="/login">
-                    Sign in
-                  </Link>
-                </Typography>
+                        {errors.fullName && (
+                          <p
+                            style={{ color: "red" }}
+                            className="text-sm text-red-600"
+                          >
+                            {errors.fullName.message}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Controller
+                  name="email"
+                  control={control}
+                  render={({ field: { onChange, value } }) => {
+                    return (
+                      <div>
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          id="email"
+                          label="Email"
+                          onChange={onChange}
+                          value={value}
+                          placeholder="carter@gmail.com"
+                          autoFocus
+                        />
+                        {errors.email && (
+                          <p
+                            style={{ color: "red" }}
+                            className="text-sm text-red-600"
+                          >
+                            {errors.email.message}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  }}
+                />
+              </Grid>
+              <Grid sx={{ paddingTop: "0px" }} item xs={12} sm={6}>
+                <Controller
+                  name="phone"
+                  control={control}
+                  render={({ field: { onChange, value } }) => {
+                    return (
+                      <div>
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          id="phone"
+                          label="Phone number"
+                          onChange={onChange}
+                          value={value}
+                          placeholder="0123456789"
+                          autoFocus
+                        />
+                        {errors.phone && (
+                          <p
+                            style={{ color: "red" }}
+                            className="text-sm text-red-600"
+                          >
+                            {errors.phone.message}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  }}
+                />
+              </Grid>
+              <Grid sx={{ paddingTop: 0 }} item xs={12} sm={6}>
+                <Controller
+                  name="dateOfBirth"
+                  control={control}
+                  render={({ field: { onChange, value } }) => {
+                    return (
+                      <div>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DatePicker
+                            onChange={onChange}
+                            sx={{
+                              marginTop: "16px",
+                              marginBottom: " 8px",
+                            }}
+                            label="Birth Date"
+                          />
+                        </LocalizationProvider>
+                        {errors.dateOfBirth && (
+                          <p
+                            style={{ color: "red" }}
+                            className="text-sm text-red-600"
+                          >
+                            {errors.dateOfBirth.message}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  }}
+                />
               </Grid>
               <Grid item xs={12}>
-                <Button
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                  sx={{ width: "100%" }}
-                  onClick={handleSubmit(onSubmit)}
-                >
-                  Submit
-                </Button>
+                <Controller
+                  name="userName"
+                  control={control}
+                  render={({ field: { onChange, value } }) => {
+                    return (
+                      <div>
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          id="userName"
+                          label="User Name"
+                          onChange={onChange}
+                          value={value}
+                          placeholder="carter123"
+                          autoFocus
+                        />
+                        {errors.userName && (
+                          <p
+                            style={{ color: "red" }}
+                            className="text-sm text-red-600"
+                          >
+                            {errors.userName.message}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Controller
+                  name="password"
+                  control={control}
+                  render={({ field: { onChange, value } }) => {
+                    return (
+                      <div>
+                        <TextField
+                          margin="normal"
+                          required
+                          fullWidth
+                          type="password"
+                          id="password"
+                          label="Password"
+                          onChange={onChange}
+                          value={value}
+                          autoFocus
+                        />
+                        {errors.password && (
+                          <p
+                            style={{ color: "red" }}
+                            className="text-sm text-red-600"
+                          >
+                            {errors.password.message}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  }}
+                />
               </Grid>
             </Grid>
-          </Grid>
-        </Form>
-      </CardContent>
-    </Card>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={handleSubmit(onSubmit)}
+            >
+              Sign Up
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link to="/login">Already have an account? Sign in</Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 5 }} />
+      </Container>
+    </ThemeProvider>
   );
 };
 

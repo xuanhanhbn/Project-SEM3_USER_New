@@ -3,13 +3,9 @@ import { useState } from "react";
 
 // ** MUI Imports
 import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
+
 import { styled } from "@mui/material/styles";
-import TextField from "@mui/material/TextField";
 import CardHeader from "@mui/material/CardHeader";
-import Typography from "@mui/material/Typography";
 import InputLabel from "@mui/material/InputLabel";
 import IconButton from "@mui/material/IconButton";
 import CardContent from "@mui/material/CardContent";
@@ -26,10 +22,43 @@ import {
 } from "./constants";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
 import { requestLogin } from "./type";
 import { useAppDispatch } from "store/hook";
 import { loginActions } from "./loginSlice";
+
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Checkbox from "@mui/material/Checkbox";
+import { Link } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+function Copyright(props: any) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" to="https://mui.com/">
+        Your Website
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
+// TODO remove, this demo shouldn't need to reset the theme.
+const defaultTheme = createTheme();
 
 // Styled component for the form
 const Form = styled("form")(({ theme }) => ({
@@ -172,65 +201,55 @@ const LoginPage = () => {
   };
 
   return (
-    <Card>
-      <CardContent
-        sx={{
-          minHeight: 500,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Form onSubmit={(e) => e.preventDefault()}>
-          <Grid container spacing={5}>
-            <Grid item xs={12}>
-              <Typography
-                className="justify-content-around d-flex"
-                variant="h5"
-                fontSize={24}
-                fontWeight={700}
-              >
-                Sign In
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
-              {inputLogin.map((input) => (
-                <div key={input.field}>{renderInput(input)}</div>
-              ))}
+    <ThemeProvider theme={defaultTheme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          onSubmit={(e) => e.preventDefault()}
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 1 }}>
+            {inputLogin.map((input) => (
+              <div key={input.field}>{renderInput(input)}</div>
+            ))}
 
-              <Grid
-                className="justify-content-around d-flex"
-                style={{ margin: "20px 0px" }}
-                item
-                xs={12}
-              >
-                <Typography variant="h5">
-                  <Link style={{ color: "#e83e8c" }} to="/forgotpassword">
-                    Forgot password?
-                  </Link>
-                </Typography>
-                <Typography variant="h5">
-                  <Link style={{ color: "#e83e8c" }} to="/signup">
-                    Sign up
-                  </Link>
-                </Typography>
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={handleSubmit(onSubmit)}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link to="/forgotpassword">Forgot password?</Link>
               </Grid>
-              <Grid item xs={12}>
-                <Button
-                  size="large"
-                  type="submit"
-                  variant="contained"
-                  sx={{ width: "100%" }}
-                  onClick={handleSubmit(onSubmit)}
-                >
-                  Sign in
-                </Button>
+              <Grid item>
+                <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
               </Grid>
             </Grid>
-          </Grid>
-        </Form>
-      </CardContent>
-    </Card>
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Container>
+    </ThemeProvider>
   );
 };
 
