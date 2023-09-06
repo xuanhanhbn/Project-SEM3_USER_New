@@ -1,9 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
-import causes1 from "assets/images/causes/causes-1.jpg";
-import causes2 from "assets/images/causes/causes-2.jpg";
-import causes3 from "assets/images/causes/causes-3.jpg";
-import causes4 from "assets/images/causes/causes-4.jpg";
 import person1 from "assets/images/business/person_1.jpg";
 import person2 from "assets/images/business/person_2.jpg";
 import person3 from "assets/images/business/person_3.jpg";
@@ -12,37 +8,77 @@ import image1 from "assets/images/outblog/image_1.jpg";
 import image2 from "assets/images/outblog/image_2.jpg";
 import image3 from "assets/images/outblog/image_3.jpg";
 import image4 from "assets/images/outblog/image_4.jpg";
-import image5 from "assets/images/outblog/image_5.jpg";
-import image6 from "assets/images/outblog/image_6.jpg";
 import team1 from "assets/images/team/team-1.jpg";
 import team2 from "assets/images/team/team-2.jpg";
 import team3 from "assets/images/team/team-3.jpg";
 import team4 from "assets/images/team/team-4.jpg";
-import team5 from "assets/images/team/team-5.jpg";
-import team6 from "assets/images/team/team-6.jpg";
-import team7 from "assets/images/team/team-7.jpg";
-import team8 from "assets/images/team/team-8.jpg";
-import team9 from "assets/images/team/team-9.jpg";
 import MultiCarousel from "react-multi-carousel";
 import { Link } from "react-router-dom";
 
-import { Carousel } from "antd";
+import { Carousel, Image } from "antd";
+import { useMutation } from "@tanstack/react-query";
+import { onGetListProgramApi } from "pages/home/api";
+import { notify } from "utils/common";
+import { Program } from "types/global";
+import { responseProgram } from "pages/home/type";
 
 const MainService = () => {
-  const [images, setImages] = useState([
-    {
-      id: 1,
-      src: "https://picsum.photos/200/300",
+  // STATE
+  const [listProgram, setListProgram] = useState<Program[] | []>([]);
+
+  const { mutate: onGetListProgram } = useMutation(onGetListProgramApi, {
+    onSuccess: (data) => {
+      if (data && data.status === 200) {
+        return setListProgram(data.data);
+      }
     },
-    {
-      id: 2,
-      src: "https://picsum.photos/200/300",
+    onError: () => {
+      setListProgram([]);
     },
-    {
-      id: 3,
-      src: "https://picsum.photos/200/300",
-    },
-  ]);
+  });
+
+  useEffect(() => {
+    onGetListProgram();
+  }, []);
+
+  const handleReturnListProgram = (item: Program) => {
+    if (!item.isClosed) {
+      return (
+        <div className="col-md-6 col-lg-3" key={`${item.name}_${item.programId}`}>
+          <div className="text-center causes causes-2 ">
+            <Image src={item.programThumbnail.path} className="img w-100" />
+            <div className="p-3 text">
+              <h2>
+                <a href="">{item.name}</a>
+              </h2>
+              <p>
+                Far far away, behind the word mountains, far from the countries
+                Vokalia
+              </p>
+              <div className="mb-4 goal">
+                <p>
+                  <span>$ {item.target}</span> to go
+                </p>
+                <div className="progress" style={{ height: "20px" }}>
+                  <div
+                    className="progress-bar progress-bar-striped"
+                    style={{ width: item.target, height: "20px" }}
+                  >
+                    70%
+                  </div>
+                </div>
+              </div>
+              <p>
+                <Link className="btn btn-light w-100" to="/causedetails">
+                  Donate Now
+                </Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  };
 
   return (
     <>
@@ -56,158 +92,10 @@ const MainService = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ">
-                <a
-                  href=""
-                  className="img w-100"
-                  style={{
-                    backgroundImage: `url(  ${causes1})`,
-                  }}
-                ></a>
-                <div className="p-3 text">
-                  <h2>
-                    <a href="">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: "20px" }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "70%", height: "20px" }}
-                      >
-                        70%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link className="btn btn-light w-100" to="/causedetails">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ">
-                <a
-                  href=""
-                  className="img w-100"
-                  style={{
-                    backgroundImage: `url(  ${causes2})`,
-                  }}
-                ></a>
-                <div className="p-3 text">
-                  <h2>
-                    <a href="">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: "20px" }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "82%", height: "20px" }}
-                      >
-                        82%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link className="btn btn-light w-100" to="/causedetails">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ">
-                <a
-                  href=""
-                  className="img w-100"
-                  style={{
-                    backgroundImage: `url(  ${causes3})`,
-                  }}
-                ></a>
-                <div className="p-3 text">
-                  <h2>
-                    <a href="">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: "20px" }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "95%", height: "20px" }}
-                      >
-                        95%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link className="btn btn-light w-100" to="/causedetails">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ">
-                <a
-                  href=""
-                  className="img w-100"
-                  style={{
-                    backgroundImage: `url(  ${causes4})`,
-                  }}
-                ></a>
-                <div className="p-3 text">
-                  <h2>
-                    <a href="">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: "20px" }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "75%", height: "20px" }}
-                      >
-                        75%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link className="btn btn-light w-100" to="/causedetails">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
+
+            {Array.isArray(listProgram) &&
+              listProgram.length > 0 &&
+              listProgram.map((item) => handleReturnListProgram(item))}
           </div>
         </div>
       </section>
