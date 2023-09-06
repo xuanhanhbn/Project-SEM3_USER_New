@@ -18,7 +18,7 @@ const Layout: React.FC<DashBoardProps> = ({ route }) => {
   const { location } = history;
 
   return (
-    <Container maxWidth="xl" style={{ padding: 0 }}>
+    <div  style={{ padding: 0 }}>
       <Suspense fallback={<LinearProgress />}>
        {ArrRouter.filter(obj => obj.path === location.pathname).map(item => {
         return (
@@ -32,7 +32,7 @@ const Layout: React.FC<DashBoardProps> = ({ route }) => {
         {renderRoutes(route?.routes)}
          <Footer />
       </Suspense>
-    </Container>
+    </div>
   );
 };
 
