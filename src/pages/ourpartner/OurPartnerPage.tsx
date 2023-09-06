@@ -15,8 +15,6 @@ import pn11 from "assets/images/partners/attachment_113975607.jpg";
 import pn12 from "assets/images/partners/attachment_129000522.jpg";
 import { Link } from "react-router-dom";
 
-import { useAppDispatch } from "store/hook";
-import { partnerActions, selectPartnerList } from "./partnerSlice";
 import { useSelector } from "react-redux";
 
 const partnerList = [
@@ -84,14 +82,7 @@ const partnerList = [
 ];
 
 function OurPartnerPage() {
-  const dispatch = useAppDispatch();
-  const globalData = useSelector(selectPartnerList);
-  console.log()
-  const dataPartner = globalData?.list;
-  
-
   useEffect(() => {
-    dispatch(partnerActions.getListPartner());
   }, []);
 
   return (

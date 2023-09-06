@@ -5,7 +5,6 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { getDesignTokens } from "lib/themes";
 import { renderRoutes } from "react-router-config";
 import { SnackbarProvider } from "notistack";
-import { RootState } from "store/reducers";
 import cookie from "cookie";
 import routes from "routes";
 import { Router } from "react-router-dom";

@@ -41,7 +41,7 @@ export type DataRequestInput = {
   email: string;
   fullName: string;
   dateOfBirth: string;
-  roles: string;
+  // roles: string[];
 };
 
 const phoneRegExp =
@@ -57,5 +57,5 @@ export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required("Full name is required"),
   email: Yup.string().required("Email is required").email("Email is invalid."),
   dateOfBirth: Yup.string().required("Birth day is required"),
-  roles: Yup.string().required("Roles is required"),
+  // roles: Yup.mixed().required("Roles is required"),
 });

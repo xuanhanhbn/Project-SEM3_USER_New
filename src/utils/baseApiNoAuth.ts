@@ -1,7 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { baseApi } from "./constant";
 
 const axiosClient = axios.create({
-  baseURL: "https://eproject3.azurewebsites.net/api",
+  baseURL: `${baseApi}`,
   headers: {
     "Content-Type": "application/json",
   },

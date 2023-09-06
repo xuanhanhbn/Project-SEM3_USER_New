@@ -3,26 +3,34 @@ import React, { Suspense, useState } from "react";
 import { renderRoutes } from "react-router-config";
 import { DashBoardProps } from "lib/interfaces";
 import Header from "components/Header";
-import Login from "pages/auth/Login";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Footer from "components/Footer";
-import routes from "routes";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import HeaderLogin from "components/HeaderLogin";
+
 
 const Layout: React.FC<DashBoardProps> = ({ route }) => {
-  // TODO: force user to login
-  // const [token, setToken] = useState();
 
-  // if (!token) {
-  //   return <Login />
-  // }
+  const history = useHistory();
+  const ArrRouter = route?.routes || []
+
+  const { location } = history;
 
   return (
     <Container maxWidth="xl" style={{ padding: 0 }}>
       <Suspense fallback={<LinearProgress />}>
-        
-        <Header />
+       {ArrRouter.filter(obj => obj.path === location.pathname).map(item => {
+        return (
+          <div key={`keyRoute_${item?.name}`}>
+            {item.noAuth  ? <HeaderLogin /> : <Header />}
+          </div>
+        )
+       })}
+        <ToastContainer />
+
         {renderRoutes(route?.routes)}
-        <Footer />
+         <Footer />
       </Suspense>
     </Container>
   );

@@ -1,11 +1,14 @@
-import axiosClient from "utils/baseApiNoAuth";
 import { requestRegister, responseRegister } from "./type";
+import baseApiAuth from 'utils/baseApiAuth';
+import { AxiosResponse } from 'axios';
 
-const getLoginDataApi = {
-  login(data: requestRegister): Promise<responseRegister> {
-    const url = "/user/register";
-    return axiosClient.post(url, data);
-  },
+
+export const registerApi = (data:requestRegister): Promise<responseRegister> => {
+  const url = '/User/register'
+  return new Promise((resolve, reject) =>
+  baseApiAuth
+      .post(url,data)
+      .then((res: AxiosResponse) => resolve(res?.data))
+      .catch((err: Error) => reject(err))
+  );
 };
-
-export default getLoginDataApi;

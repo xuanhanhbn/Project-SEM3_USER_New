@@ -7,18 +7,12 @@ import person1 from "assets/images/business/person_1.jpg";
 import person2 from "assets/images/business/person_2.jpg";
 import person3 from "assets/images/business/person_3.jpg";
 import person4 from "assets/images/business/person_4.jpg";
-import { useAppDispatch } from "store/hook";
-import { aboutActions, selectCityList } from "./aboutSlice";
-import { useSelector } from "react-redux";
 
 const AboutPage = () => {
-  const dispatch = useAppDispatch();
-  const globalData = useSelector(selectCityList);
-  const dataAbout = globalData?.list;
-  console.log("about", dataAbout);
+
 
   useEffect(() => {
-    dispatch(aboutActions.getListAbout());
+    // dispatch(aboutActions.getListAbout());
   }, []);
   console.log('s');
   

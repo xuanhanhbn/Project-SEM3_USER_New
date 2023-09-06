@@ -4,8 +4,5 @@ export interface responseForgotPassword {
 }
 
 export interface requestForgotPassword {
-  userName: string;
-  newPassword: string;
   email: string;
-  confirmPassword: string;
 }

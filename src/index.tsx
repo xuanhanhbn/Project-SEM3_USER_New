@@ -1,34 +1,35 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import "assets/styles/animate.css";
-import "assets/styles/bootstrap-datepicker.css";
-import "assets/styles/bootstrap.min.css";
-import "assets/styles/flaticon.css";
-import "assets/styles/jquery.timepicker.css";
-import "assets/styles/magnific-popup.css";
-import "assets/styles/owl.carousel.min.css";
-import "assets/styles/owl.theme.default.min.css";
+// import "assets/styles/animate.css";
+// import "assets/styles/bootstrap-datepicker.css";
+// import "assets/styles/bootstrap.min.css";
+// import "assets/styles/flaticon.css";
+// import "assets/styles/jquery.timepicker.css";
+// import "assets/styles/magnific-popup.css";
+// import "assets/styles/owl.carousel.min.css";
+// import "assets/styles/owl.theme.default.min.css";
 import "assets/css/index.css";
 
-import "bootstrap/dist/js/bootstrap.min.js";
+// import "bootstrap/dist/js/bootstrap.min.js";
 import "./i18n";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./store/store";
 import { HelmetProvider } from "react-helmet-async";
-import { Provider } from "react-redux";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+const queryClient = new QueryClient()
+
 root.render(
-  <Provider store={store}>
+  <QueryClientProvider client={queryClient}>
     <HelmetProvider>
       <App />
     </HelmetProvider>
-  </Provider>
+  </QueryClientProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -21,8 +21,6 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 import { requestChangePassword } from "./type";
-import { useAppDispatch } from "store/hook";
-import { changePasswordActions } from "./changePasswordSlice";
 
 import {
   DataRequestInput,
@@ -55,7 +53,6 @@ const showPass = (
 );
 
 function ChangePasswordPage() {
-  const dispatch = useAppDispatch();
 
   // ** State
   const [values, setValues] = useState({
@@ -111,7 +108,8 @@ function ChangePasswordPage() {
   };
 
   const onSubmit = (data: requestChangePassword) => {
-    dispatch(changePasswordActions.onChangePassword(data));
+    console.log('data: ',data);
+
   };
 
   // render input

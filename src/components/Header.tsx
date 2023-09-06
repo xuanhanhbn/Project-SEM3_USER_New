@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import logo from "assets/images/logo/logo.png";
-import { Box, BoxProps } from "@mui/material";
-import CustomButton from "components/CustomButton";
 import CustomLink from "./CustomLink";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { Dropdown, Space } from "antd";
+import { DownOutlined } from "@ant-design/icons"
+import type { MenuProps } from 'antd';
+import { items } from "./type";
+import useGlobalStore from "store/globalStore";
 
 export interface SelectedRoute {
   path: string;
@@ -15,7 +17,14 @@ export interface SelectedRoute {
 }
 
 const Header = () => {
-  const trigger = useScrollTrigger();
+  const history = useHistory();
+
+  // STATE
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const userInfo = useGlobalStore((state) => state.userInfo);
+  const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
+
+
 
   const routeArr: SelectedRoute[] = [
     {
@@ -65,6 +74,19 @@ const Header = () => {
       />
     );
   });
+
+  const handleClickItemsDropdown: MenuProps['onClick'] = (config) => {
+    // Khi click vaof about ở drop down
+    if(config.key === '1') {
+      console.log('ABOUT');
+    }
+    // Click vao Logout
+    if(config.key === '2') {
+        localStorage.removeItem('loginData')
+        updateUserInfoData(null)
+        return setIsLogin(false)
+    }
+  }
   return (
     <div>
       <div className="wrap">
@@ -171,27 +193,58 @@ const Header = () => {
 
           <div className="collapse navbar-collapse" id="ftco-nav">
             <ul className="ml-auto navbar-nav">{listItems}</ul>
-            <div className="dropdown">
+            {userInfo && (
+              <div className="d-flex justify-content-center align-items-center">
+                <div className="mr-2 text-white">Welcome</div>
+                <div>
+                  <Dropdown menu={{ items,  onClick: handleClickItemsDropdown,
+                   }} trigger={["click"]}>
+                    <a onClick={(e) => e.preventDefault()}>
+                      <Space style={{color:'#fd645b',fontWeight:700,fontSize:16}}>
+                        {userInfo?.fullName}
+                        <DownOutlined />
+                      </Space>
+                    </a>
+                  </Dropdown>
+                </div>
+              </div>
+            )}
+            {!userInfo && (
+              <div className="dropdown">
+                <button
+                  className="btn btn-secondary"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  onClick={() => history.push("/login")}
+                >
+                  Login
+                </button>
+              </div>
+            )}
+            {/* <div className="dropdown">
               <button
-                className="btn btn-secondary dropdown-toggle"
+                className="btn btn-secondary"
                 type="button"
                 id="dropdownMenuButton1"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
+                onClick={() => history.push('/login')}
               >
-                Duongtm
+                Login
               </button>
               <ul
                 className="dropdown-menu"
-                aria-labelledby="dropdownMenuButton1"
-              >
-                {/* <li>
+                aria-labelledby="dropdownMenuButton1" */}
+            {/* > */}
+            {/* <li>
                   <a className="dropdown-item" href="#">
                     Login/Logout
                   </a>
-                  
+
                 </li> */}
-                <Link className="dropdown-item" to="/login">
+            {/* <Link className="dropdown-item" to="/login">
                   Login/Logout
                 </Link>
 
@@ -199,7 +252,7 @@ const Header = () => {
                   Change password
                 </Link>
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
       </nav>

@@ -2,7 +2,7 @@ import * as Yup from "yup";
 
 export const inputLogin = [
   {
-    field: "userName",
+    field: "identifier",
     placeHolder: "User Name",
     type: "INPUT",
   },
@@ -20,11 +20,11 @@ export type typeInputLogin = {
 };
 
 export type DataRequestInput = {
-  userName: string;
+  identifier: string;
   password: string;
 };
 
 export const validationSchema = Yup.object().shape({
-  userName: Yup.string().required("User Name is required"),
+  identifier: Yup.string().required("User Name is required"),
   password: Yup.string().required("Password is required"),
 });
