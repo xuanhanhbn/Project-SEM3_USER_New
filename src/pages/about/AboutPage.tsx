@@ -20,6 +20,8 @@ const AboutPage = () => {
   useEffect(() => {
     dispatch(aboutActions.getListAbout());
   }, []);
+  console.log('s');
+  
 
   return (
     <>
