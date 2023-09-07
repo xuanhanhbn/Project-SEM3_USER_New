@@ -13,8 +13,8 @@ export const inputHomeDonate = [
   },
 
   {
-    field: "selectCauses",
-    placeHolder: "Causes",
+    field: "reason",
+    placeHolder: "Reason",
     type: "SELECT",
   },
   {
@@ -34,7 +34,7 @@ export type DataRequestInput = {
   fullName: string;
   email: string;
   amount: string;
-  selectCauses: string;
+  reason: string;
 };
 
 export const listCauses = [
@@ -78,6 +78,6 @@ export const radioPayload = [
 export const validationSchema = Yup.object().shape({
   fullName: Yup.string().required("Full Name is required"),
   email: Yup.string().required("Email is required").email("Email is invalid."),
-  selectCauses: Yup.string().required("selectCauses is required"),
+  reason: Yup.string().required("selectCauses is required"),
   amount: Yup.string().required("Amount is required"),
 });

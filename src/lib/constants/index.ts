@@ -4,7 +4,7 @@ export const paths = {
   about: "/about",
   contact: "/contact",
   gallery: "/gallery",
-  donation: "/donation",
+  // donation: "/donation",
   ourpartner: "/ourpartner",
   helpcentre: "/helpcentre",
   programdetail: "/Programdetail/:programId",
@@ -19,4 +19,5 @@ export const paths = {
   activeCode: "/forgot-password/active-code",
   resetPassword: "/forgot-password/reset-password",
   resetSuccess: "/forgot-password/success",
+  payment: "/payment",
 };

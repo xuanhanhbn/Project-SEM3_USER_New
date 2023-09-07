@@ -41,25 +41,20 @@ const MainService = () => {
     onGetListProgram();
   }, []);
 
-  const handleCalculatorPercent = (item:Program) => {
-    const Percentage = 0
+  const handleCalculatorPercent = (item: Program) => {
+    const Percentage = 0;
     if (item?.target > 0 && item?.totalDonation > 0) {
-      const Percentage = (item?.totalDonation / item?.target ) * 100
+      const Percentage = (item?.totalDonation / item?.target) * 100;
 
-    console.log('Percentage: ',Percentage);
+      console.log("Percentage: ", Percentage);
 
-      return Percentage
+      return Percentage;
     }
 
-
-    return Percentage
-  }
-
-
-
+    return Percentage;
+  };
 
   const handleReturnListProgram = (item: Program) => {
-
     if (!item.isClosed) {
       return (
         <div
@@ -67,13 +62,24 @@ const MainService = () => {
           key={`${item.name}_${item.programId}`}
         >
           <div className="text-center causes causes-2 ">
-            <Image src={item.programThumbnail.path} alt={`Image_Program_${item?.name}`} className="img w-100" />
+            <Image
+              src={item.programThumbnail.path}
+              alt={`Image_Program_${item?.name}`}
+              className="img w-100"
+            />
             <div className="p-3 text">
               <h2>
                 <a href="">{item.name}</a>
               </h2>
-              <p style={{maxWidth:210,whiteSpace:"nowrap",overflow:'hidden',textOverflow:'ellipsis'}}>
-              {item.description}
+              <p
+                style={{
+                  maxWidth: 210,
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {item.description}
               </p>
               <div className="mb-4 goal">
                 <p>
@@ -82,16 +88,22 @@ const MainService = () => {
                 <div className="progress" style={{ height: "20px" }}>
                   <div
                     className="progress-bar progress-bar-striped"
-                    style={{ width: handleCalculatorPercent(item), height: "20px" }}
+                    style={{
+                      width: handleCalculatorPercent(item),
+                      height: "20px",
+                    }}
                   >
                     {handleCalculatorPercent(item)} %
                   </div>
                 </div>
               </div>
               <p>
-                <Link className="btn btn-light w-100" to={{
-                  pathname:`/Programdetail/programId=${item?.programId}`
-                }}>
+                <Link
+                  className="btn btn-light w-100"
+                  to={{
+                    pathname: `/Programdetail/programId=${item?.programId}`,
+                  }}
+                >
                   Donate Now
                 </Link>
               </p>

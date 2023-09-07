@@ -28,11 +28,11 @@ const routes = [
         path: paths.gallery,
         component: lazy(() => import("pages/gallery/GalleryPage")),
       },
-      {
-        name: "donation",
-        path: paths.donation,
-        component: lazy(() => import("pages/donation/DonationPage")),
-      },
+      // {
+      //   name: "donation",
+      //   path: paths.donation,
+      //   component: lazy(() => import("pages/donation/DonationPage")),
+      // },
       {
         name: "ourpartner",
         path: paths.ourpartner,
@@ -141,6 +141,11 @@ const routes = [
             )
         ),
         noAuth: true,
+      },
+      {
+        name: "payment",
+        path: paths.payment,
+        component: lazy(() => import("pages/paymentstatus/PaymentStatusPage")),
       },
     ],
   },

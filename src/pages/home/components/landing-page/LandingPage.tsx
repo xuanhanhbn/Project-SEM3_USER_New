@@ -26,6 +26,7 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   const {
@@ -109,7 +110,6 @@ const LandingPage = () => {
               <div className="">
                 <div className="form-group">
                   <label htmlFor="name">{item.placeHolder}</label>
-
                   <div className="input-wrap">
                     <input {...field} type="text" className="form-control" />
                   </div>
@@ -202,9 +202,12 @@ const LandingPage = () => {
                         <div className="d-flex meta">
                           <div className="">
                             <p className="mb-0">
-                              <a className="px-2 py-3 btn btn-secondary px-md-4">
+                              <Link
+                                to="/program"
+                                className="px-2 py-3 btn btn-secondary px-md-4"
+                              >
                                 Become a volunteer
-                              </a>
+                              </Link>
                             </p>
                           </div>
                         </div>
@@ -238,9 +241,12 @@ const LandingPage = () => {
                         <div className="d-flex meta">
                           <div className="">
                             <p className="mb-0">
-                              <a className="px-2 py-3 btn btn-secondary px-md-4">
+                              <Link
+                                to="/program"
+                                className="px-2 py-3 btn btn-secondary px-md-4"
+                              >
                                 Become a volunteer
-                              </a>
+                              </Link>
                             </p>
                           </div>
                         </div>
@@ -273,9 +279,12 @@ const LandingPage = () => {
                         <div className="d-flex meta">
                           <div className="">
                             <p className="mb-0">
-                              <a className="px-2 py-3 btn btn-secondary px-md-4">
+                              <Link
+                                to="/program"
+                                className="px-2 py-3 btn btn-secondary px-md-4"
+                              >
                                 Become a volunteer
-                              </a>
+                              </Link>
                             </p>
                           </div>
                         </div>
@@ -294,85 +303,7 @@ const LandingPage = () => {
         <div className="overlay"></div>
         <div className="container">
           <div className="row">
-            <div className="col-md-5 order-md-last d-flex align-items-stretch">
-              <div className="donation-wrap">
-                <div className="total-donate d-flex align-items-center">
-                  <span className="fa flaticon-cleaning"></span>
-                  <h4>
-                    Donation Campaign <br />
-                    are running
-                  </h4>
-                  <p className="d-flex align-items-center">
-                    <span>$</span>
-                    <span className="number" data-number="24781">
-                      0
-                    </span>
-                  </p>
-                </div>
-                <form onSubmit={handleSubmit(onSubmit)} className="appointment">
-                  <div className="row">
-                    {inputHomeDonate.map((input) => (
-                      <div key={input.field}>{renderInput(input)}</div>
-                    ))}
-
-                    <div className="">
-                      <div className="form-group">
-                        <label htmlFor="name">Payment Method</label>
-                        <div className="d-lg-flex">
-                          <Controller
-                            control={control}
-                            render={({ field: { onChange, value } }) => (
-                              <>
-                                <FormControl>
-                                  <RadioGroup
-                                    onChange={onChange}
-                                    value={value}
-                                    row
-                                    aria-label="gender"
-                                    name="account-settings-info-radio"
-                                  >
-                                    {radioPayload.map((radio) => {
-                                      return (
-                                        <FormControlLabel
-                                          key={radio.field}
-                                          value={radio.field}
-                                          label={radio.value}
-                                          control={<Radio />}
-                                        />
-                                      );
-                                    })}
-                                  </RadioGroup>
-                                </FormControl>
-                              </>
-                            )}
-                            name="payload"
-                          />
-                        </div>
-                        {errors.payload && (
-                          <p
-                            style={{ color: " #FFCC47" }}
-                            className="text-sm text-red-600"
-                          >
-                            {errors.payload.message}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="">
-                      <div className="form-group">
-                        <input
-                          type="submit"
-                          value="Donate Now"
-                          className="px-4 py-3 btn btn-secondary"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div className="py-5 col-md-7 wrap-about">
+            <div className="py-5 col-md-12 wrap-about">
               <div className="heading-section pr-md-5 pt-md-5">
                 <span className="subheading">Welcome to unicare</span>
                 <h2 className="mb-4">We are here to help everyone in need</h2>
@@ -388,13 +319,13 @@ const LandingPage = () => {
                   abused her for their.
                 </p>
               </div>
-              <div className="row my-md-5">
+              <div className="row my-md-5 ">
                 <div className="col-md-6 d-flex counter-wrap">
-                  <div className="block-18 d-flex">
+                  <div className="block-18 d-flex justify-content-center">
                     <div className="icon d-flex align-items-center justify-content-center">
                       <span className="flaticon-volunteer"></span>
                     </div>
-                    <div className="desc">
+                    <div className="mx-4">
                       <div className="text">
                         <strong className="number" data-number="50">
                           0
@@ -407,11 +338,11 @@ const LandingPage = () => {
                   </div>
                 </div>
                 <div className="col-md-6 d-flex counter-wrap">
-                  <div className="block-18 d-flex">
+                  <div className="block-18 d-flex justify-content-center">
                     <div className="icon d-flex align-items-center justify-content-center">
                       <span className="flaticon-piggy-bank"></span>
                     </div>
-                    <div className="desc">
+                    <div className="mx-4">
                       <div className="text">
                         <strong className="number" data-number="24400">
                           0
@@ -424,11 +355,6 @@ const LandingPage = () => {
                   </div>
                 </div>
               </div>
-              <p>
-                <a className="btn btn-secondary btn-outline-secondary">
-                  Become A Volunteer
-                </a>
-              </p>
             </div>
           </div>
         </div>

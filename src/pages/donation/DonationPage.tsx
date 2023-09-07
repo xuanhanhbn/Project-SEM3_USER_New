@@ -41,7 +41,7 @@ function DonationPage() {
     defaultValues: {
       fullName: "",
       email: "",
-      selectCauses: "",
+      reason: "",
       amount: "",
     },
     resolver: yupResolver(validationSchema),
@@ -94,42 +94,6 @@ function DonationPage() {
     //     />
     //   );
     // }
-    if (
-      // item.field === "fullName" ||
-      // item.field === "email" ||
-      item.field === "selectCauses"
-    ) {
-      return (
-        <>
-          <Controller
-            name={item.field}
-            control={control}
-            defaultValue=""
-            render={({ field }) => (
-              <div className="">
-                <div className="form-group">
-                  <label htmlFor="name">{item.placeHolder}</label>
-
-                  <div className="input-wrap">
-                    <input {...field} type="text" className="form-control" />
-                  </div>
-                  {errors &&
-                    errors[item.field as keyof DataRequestInput] &&
-                    errors[item.field as keyof DataRequestInput]?.message && (
-                      <p
-                        style={{ color: " #FFCC47" }}
-                        className="text-sm text-red-600"
-                      >
-                        {errors[item.field as keyof DataRequestInput]?.message}
-                      </p>
-                    )}
-                </div>
-              </div>
-            )}
-          />
-        </>
-      );
-    }
 
     if (item.field === "amount") {
       return (

@@ -31,6 +31,11 @@ const Header = () => {
       active: true,
     },
     {
+      path: "/ourpartner",
+      label: "Our partners",
+      active: false,
+    },
+    {
       path: "/about",
       label: "About",
       active: false,
@@ -40,11 +45,7 @@ const Header = () => {
       label: "Gallery",
       active: false,
     },
-    {
-      path: "/ourpartner",
-      label: "Our partners",
-      active: false,
-    },
+
     {
       path: "/helpcentre",
       label: "Help centre",
@@ -55,11 +56,11 @@ const Header = () => {
       label: "Contact",
       active: false,
     },
-    {
-      path: "/program",
-      label: "Program",
-      active: false,
-    },
+    // {
+    //   path: "/program",
+    //   label: "Program",
+    //   active: false,
+    // },
   ];
 
   const listItems = routeArr.map((route: SelectedRoute) => {

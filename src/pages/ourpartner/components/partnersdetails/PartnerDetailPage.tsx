@@ -68,8 +68,7 @@ function PartnerDetailPage() {
                 </span>
                 <span>
                   <a href="/ourpartner">
-                  Partner list <i className="ion-ios-arrow-forward"></i>
-
+                    Partner list <i className="ion-ios-arrow-forward"></i>
                   </a>
                 </span>
                 <span>
@@ -131,31 +130,51 @@ function PartnerDetailPage() {
                           src={itemProgram?.programThumbnail?.path}
                         />
                         <div className="p-3 text">
-                          <h2>
+                          <h2
+                            style={{
+                              textOverflow: "ellipsis",
+                              maxHeight: "3em",
+                              overflow: "hidden",
+                              minHeight: "60px",
+                            }}
+                          >
                             <a href="#">{itemProgram.name}</a>
                           </h2>
-                          <p>{itemProgram.description}</p>
-                          <div className="mb-4 goal">
-                            <p>
-                              <span>{`$ ${itemProgram.target}`}</span> to go
-                            </p>
-                            <div className="progress" style={{ height: 20 }}>
-                              <div
-                                className="progress-bar progress-bar-striped"
-                                style={{ width: "95%", height: 20 }}
-                              >
-                                {/* {handleCalculatorPercent(itemProgram)} */}
+                          <div
+                            style={{
+                              textOverflow: "ellipsis",
+                              maxHeight: "4.5em",
+                              overflow: "hidden",
+                              WebkitLineClamp: 3,
+                              minHeight: "72px",
+                            }}
+                          >
+                            <p>{itemProgram.description}</p>
+                          </div>
+
+                          <div style={{ marginTop: 20 }}>
+                            <div className="mb-4 goal">
+                              <p>
+                                <span>{`$ ${itemProgram.target}`}</span> to go
+                              </p>
+                              <div className="progress" style={{ height: 20 }}>
+                                <div
+                                  className="progress-bar progress-bar-striped"
+                                  style={{ width: "95%", height: 20 }}
+                                >
+                                  {/* {handleCalculatorPercent(itemProgram)} */}
+                                </div>
                               </div>
                             </div>
+                            <p>
+                              <Link
+                                to="/causedetails"
+                                className="btn btn-light w-100"
+                              >
+                                Donate Now
+                              </Link>
+                            </p>
                           </div>
-                          <p>
-                            <Link
-                              to="/causedetails"
-                              className="btn btn-light w-100"
-                            >
-                              Donate Now
-                            </Link>
-                          </p>
                         </div>
                       </div>
                     </div>
