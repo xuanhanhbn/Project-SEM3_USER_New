@@ -1,5 +1,5 @@
 import bg from "assets/images/gallery/page-title-bg-1.jpg";
-import BlankUser from "assets/images/team/BlankUser.avif";
+import BlankUser from "assets/images/team/BlankUser2.png";
 import React, { useEffect, useState } from "react";
 import "./css.css";
 import { Link, useLocation, useParams } from "react-router-dom";
