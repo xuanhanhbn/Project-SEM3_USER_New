@@ -44,13 +44,19 @@ const MainService = () => {
   const handleCalculatorPercent = (item:Program) => {
     const Percentage = 0
     if (item?.target > 0 && item?.totalDonation > 0) {
-      const Percentage = (item?.target / item?.totalDonation) * 100
+      const Percentage = (item?.totalDonation / item?.target ) * 100
+
+    console.log('Percentage: ',Percentage);
 
       return Percentage
     }
 
+
     return Percentage
   }
+
+
+
 
   const handleReturnListProgram = (item: Program) => {
 
