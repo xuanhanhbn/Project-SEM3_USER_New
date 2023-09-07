@@ -51,7 +51,7 @@
 }
 
 .cause-details__donations-list li {
-  @apply relative py-5 pl-40;
+  @apply relative py-5 ;
   padding-top: 20px;
   padding-bottom: 20px
 }

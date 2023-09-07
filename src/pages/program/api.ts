@@ -1,11 +1,18 @@
-import axiosClient from "utils/baseApiNoAuth";
-import { responseCausesList, responseDataCausesList } from "pages/program/type";
+import baseApiAuth from 'utils/baseApiAuth';
 
-const getCausesDataApi = {
-  getCauses(): Promise<responseCausesList<responseDataCausesList>> {
-    const url = "/program";
-    return axiosClient.get(url);
-  },
+import { RouteParams,  } from "pages/program/type";
+import { ProgramDetail } from "types/global";
+import { AxiosResponse } from 'axios';
+
+
+export const getProgramDetails = (data:RouteParams): Promise<ProgramDetail> => {
+  const url = `/Program/${data.programId}`;
+  return new Promise((resolve, reject) =>
+  baseApiAuth
+      .get(url)
+      .then((res:AxiosResponse) => resolve(res.data))
+      .catch((err: Error) => reject(err))
+  );
 };
 
-export default getCausesDataApi;
+

@@ -1,6 +1,6 @@
 export interface responseRegister {
-  data: string;
-  status: number;
+  token: string;
+  validTo: string;
 }
 
 export interface requestRegister {
