@@ -44,7 +44,10 @@ const MainService = () => {
   const handleReturnListProgram = (item: Program) => {
     if (!item.isClosed) {
       return (
-        <div className="col-md-6 col-lg-3" key={`${item.name}_${item.programId}`}>
+        <div
+          className="col-md-6 col-lg-3"
+          key={`${item.name}_${item.programId}`}
+        >
           <div className="text-center causes causes-2 ">
             <Image src={item.programThumbnail.path} className="img w-100" />
             <div className="p-3 text">
@@ -69,7 +72,7 @@ const MainService = () => {
                 </div>
               </div>
               <p>
-                <Link className="btn btn-light w-100" to="/causedetails">
+                <Link className="btn btn-light w-100" to="/programdetail">
                   Donate Now
                 </Link>
               </p>
@@ -92,7 +95,6 @@ const MainService = () => {
             </div>
           </div>
           <div className="row">
-
             {Array.isArray(listProgram) &&
               listProgram.length > 0 &&
               listProgram.map((item) => handleReturnListProgram(item))}

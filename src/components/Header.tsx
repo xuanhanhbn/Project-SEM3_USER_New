@@ -56,7 +56,7 @@ const Header = () => {
       active: false,
     },
     {
-      path: "/causes",
+      path: "/program",
       label: "Program",
       active: false,
     },

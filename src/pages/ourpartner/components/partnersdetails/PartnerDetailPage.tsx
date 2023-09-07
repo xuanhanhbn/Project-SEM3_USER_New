@@ -153,7 +153,7 @@ function PartnerDetailPage() {
                               </div>
                               <p>
                                 <Link
-                                  to="/causedetails"
+                                  to="/programdetail"
                                   className="btn btn-light w-100"
                                 >
                                   Donate Now
@@ -197,7 +197,7 @@ function PartnerDetailPage() {
                               </div>
                               <p>
                                 <Link
-                                  to="/causedetails"
+                                  to="/programdetail"
                                   className="btn btn-light w-100"
                                 >
                                   Donate Now
@@ -241,7 +241,7 @@ function PartnerDetailPage() {
                               </div>
                               <p>
                                 <Link
-                                  to="/causedetails"
+                                  to="/programdetail"
                                   className="btn btn-light w-100"
                                 >
                                   Donate Now
@@ -285,7 +285,7 @@ function PartnerDetailPage() {
                               </div>
                               <p>
                                 <Link
-                                  to="/causedetails"
+                                  to="/programdetail"
                                   className="btn btn-light w-100"
                                 >
                                   Donate Now
@@ -329,7 +329,7 @@ function PartnerDetailPage() {
                               </div>
                               <p>
                                 <Link
-                                  to="/causedetails"
+                                  to="/programdetail"
                                   className="btn btn-light w-100"
                                 >
                                   Donate Now
@@ -373,7 +373,7 @@ function PartnerDetailPage() {
                               </div>
                               <p>
                                 <Link
-                                  to="/causedetails"
+                                  to="/programdetail"
                                   className="btn btn-light w-100"
                                 >
                                   Donate Now

@@ -72,7 +72,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -108,7 +108,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -144,7 +144,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -180,7 +180,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -216,7 +216,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -252,7 +252,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -288,7 +288,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -324,7 +324,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>

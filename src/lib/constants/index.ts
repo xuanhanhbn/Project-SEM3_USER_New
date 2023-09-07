@@ -7,7 +7,7 @@ export const paths = {
   donation: "/donation",
   ourpartner: "/ourpartner",
   helpcentre: "/helpcentre",
-  causedetails: "/causedetails",
+  programdetail: "/programdetail",
   blogdetails: "/blogdetails",
   login: "/login",
   partnerdetail: '/partnerdetail',
@@ -15,7 +15,7 @@ export const paths = {
   forgotpassword: '/forgotpassword',
   changepassword: '/changepassword',
   volunteer: '/volunteer',
-  causes: '/causes',
+  program: '/program',
   activeCode:'/forgot-password/active-code',
   resetPassword:'/forgot-password/reset-password',
   resetSuccess: '/forgot-password/success'

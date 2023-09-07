@@ -8,62 +8,62 @@ const routes = [
     component: Layout,
     routes: [
       {
-        name:'landing',
+        name: "landing",
         path: paths.Landing,
         exact: true,
         component: lazy(() => import("pages/home/Home")),
       },
       {
-        name:'about',
+        name: "about",
         path: paths.about,
         component: lazy(() => import("pages/about/AboutPage")),
       },
       {
-        name:'contact',
+        name: "contact",
         path: paths.contact,
         component: lazy(() => import("pages/contact/ContactPage")),
       },
       {
-        name:'gallery',
+        name: "gallery",
         path: paths.gallery,
         component: lazy(() => import("pages/gallery/GalleryPage")),
       },
       {
-        name:'donation',
+        name: "donation",
         path: paths.donation,
         component: lazy(() => import("pages/donation/DonationPage")),
       },
       {
-        name:'ourpartner',
+        name: "ourpartner",
         path: paths.ourpartner,
         component: lazy(() => import("pages/ourpartner/OurPartnerPage")),
       },
       {
-        name:'helpcentre',
+        name: "helpcentre",
         path: paths.helpcentre,
         component: lazy(() => import("pages/helpcentre/HelpCentrePage")),
       },
       {
-        name:'causedetails',
-        path: paths.causedetails,
+        name: "programdetail",
+        path: paths.programdetail,
         component: lazy(
-          () => import("pages/causes/components/causedetails/CauseDetailsPage")
+          () =>
+            import("pages/program/components/programdetail/ProgramDetailsPage")
         ),
       },
       {
-        name:'blogdetails',
+        name: "blogdetails",
         path: paths.blogdetails,
         component: lazy(() => import("pages/blog/blogdetails/BlogDetailsPage")),
       },
       {
-        name:'login',
+        name: "login",
         path: paths.login,
         component: lazy(() => import("pages/auth/components/login/LoginPage")),
-        noAuth:true,
-
+        noAuth: true,
       },
       {
-        name:'partnerdetail',
+        name: "partnerdetail",
         path: paths.partnerdetail,
         component: lazy(
           () =>
@@ -73,53 +73,74 @@ const routes = [
         ),
       },
       {
-        name:'signup',
+        name: "signup",
         path: paths.signup,
-        component: lazy(() => import("pages/auth/components/signup/SignupPage")),
-        noAuth:true,
+        component: lazy(
+          () => import("pages/auth/components/signup/SignupPage")
+        ),
+        noAuth: true,
       },
       {
-        name:'forgotpassword',
+        name: "forgotpassword",
         path: paths.forgotpassword,
         component: lazy(
-          () => import("pages/auth/components/forgotpassword/ForgotPasswordPage")
+          () =>
+            import("pages/auth/components/forgotpassword/ForgotPasswordPage")
         ),
-        noAuth:true,
+        noAuth: true,
       },
       {
-        name:'volunteer',
+        name: "volunteer",
         path: paths.volunteer,
         component: lazy(() => import("pages/volunteer/VolunteerPage")),
       },
       {
-        name:'causes',
-        path: paths.causes,
-        component: lazy(() => import("pages/causes/CausesPage")),
+        name: "program",
+        path: paths.program,
+        component: lazy(() => import("pages/program/ProgramPage")),
       },
       {
-        name:'changepassword',
+        name: "changepassword",
         path: paths.changepassword,
-        component: lazy(() => import("pages/auth/components/changepassword/ChangePasswordPage")),
-        noAuth:true,
+        component: lazy(
+          () =>
+            import("pages/auth/components/changepassword/ChangePasswordPage")
+        ),
+        noAuth: true,
       },
       {
-        name:'activeCode',
+        name: "activeCode",
 
         path: paths.activeCode,
-        component: lazy(() => import("pages/auth/components/forgotpassword/components/ActiveCode/ActiveCode")),
-        noAuth:true,
+        component: lazy(
+          () =>
+            import(
+              "pages/auth/components/forgotpassword/components/ActiveCode/ActiveCode"
+            )
+        ),
+        noAuth: true,
       },
       {
-        name:'resetPassword',
+        name: "resetPassword",
         path: paths.resetPassword,
-        component: lazy(() => import("pages/auth/components/forgotpassword/components/ConfirmPassword/ChangePassword")),
-        noAuth:true,
+        component: lazy(
+          () =>
+            import(
+              "pages/auth/components/forgotpassword/components/ConfirmPassword/ChangePassword"
+            )
+        ),
+        noAuth: true,
       },
       {
-        name:'resetSuccess',
+        name: "resetSuccess",
         path: paths.resetSuccess,
-        component: lazy(() => import("pages/auth/components/forgotpassword/components/Success/ResetPasswordSuccess")),
-        noAuth:true,
+        component: lazy(
+          () =>
+            import(
+              "pages/auth/components/forgotpassword/components/Success/ResetPasswordSuccess"
+            )
+        ),
+        noAuth: true,
       },
     ],
   },

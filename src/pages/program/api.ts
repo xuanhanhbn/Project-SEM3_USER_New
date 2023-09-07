@@ -1,5 +1,5 @@
 import axiosClient from "utils/baseApiNoAuth";
-import { responseCausesList, responseDataCausesList } from "pages/causes/type";
+import { responseCausesList, responseDataCausesList } from "pages/program/type";
 
 const getCausesDataApi = {
   getCauses(): Promise<responseCausesList<responseDataCausesList>> {
