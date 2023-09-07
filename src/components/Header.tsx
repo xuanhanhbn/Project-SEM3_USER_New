@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { Link, useHistory } from "react-router-dom";
 import { Dropdown, Space } from "antd";
-import { DownOutlined } from "@ant-design/icons"
-import type { MenuProps } from 'antd';
+import { DownOutlined } from "@ant-design/icons";
+import type { MenuProps } from "antd";
 import { items } from "./type";
 import useGlobalStore from "store/globalStore";
 
@@ -23,8 +23,6 @@ const Header = () => {
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const userInfo = useGlobalStore((state) => state.userInfo);
   const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
-
-
 
   const routeArr: SelectedRoute[] = [
     {
@@ -58,8 +56,8 @@ const Header = () => {
       active: false,
     },
     {
-      path: "/donation",
-      label: "Donation",
+      path: "/causes",
+      label: "Program",
       active: false,
     },
   ];
@@ -75,18 +73,18 @@ const Header = () => {
     );
   });
 
-  const handleClickItemsDropdown: MenuProps['onClick'] = (config) => {
+  const handleClickItemsDropdown: MenuProps["onClick"] = (config) => {
     // Khi click vaof about ở drop down
-    if(config.key === '1') {
-      console.log('ABOUT');
+    if (config.key === "1") {
+      console.log("ABOUT");
     }
     // Click vao Logout
-    if(config.key === '2') {
-        localStorage.removeItem('loginData')
-        updateUserInfoData(null)
-        return setIsLogin(false)
+    if (config.key === "2") {
+      localStorage.removeItem("loginData");
+      updateUserInfoData(null);
+      return setIsLogin(false);
     }
-  }
+  };
   return (
     <div>
       <div className="wrap">
@@ -197,10 +195,18 @@ const Header = () => {
               <div className="d-flex justify-content-center align-items-center">
                 <div className="mr-2 text-white">Welcome</div>
                 <div>
-                  <Dropdown menu={{ items,  onClick: handleClickItemsDropdown,
-                   }} trigger={["click"]}>
+                  <Dropdown
+                    menu={{ items, onClick: handleClickItemsDropdown }}
+                    trigger={["click"]}
+                  >
                     <a onClick={(e) => e.preventDefault()}>
-                      <Space style={{color:'#fd645b',fontWeight:700,fontSize:16}}>
+                      <Space
+                        style={{
+                          color: "#fd645b",
+                          fontWeight: 700,
+                          fontSize: 16,
+                        }}
+                      >
                         {userInfo?.fullName}
                         <DownOutlined />
                       </Space>

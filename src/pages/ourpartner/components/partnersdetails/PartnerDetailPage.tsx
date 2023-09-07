@@ -1,10 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import bg from "assets/images/gallery/page-title-bg-1.jpg";
 import img from "assets/images/partners/attachment_129000522.jpg";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import bg2 from "assets/images/carousel/bg_2.jpg";
 
+import { useMutation } from "@tanstack/react-query";
+import { onGetPartnerDetailApi } from "./api";
+import { notify } from "utils/common";
+import { PartnerDetail } from "types/global";
+import { responsePartnerDetail } from "./type";
+import { Image } from "antd";
+import { request } from "http";
+
 function PartnerDetailPage() {
+  // STATE;
+  const [dataPartnerDetail, setDataPartnerDetail] = useState<
+    PartnerDetail | {}
+  >({});
+
+  const { id }: any = useParams();
+
+  console.log("partnerId", id);
+
+  const { mutate: onGetDataPartnerDetail } = useMutation(
+    onGetPartnerDetailApi,
+    {
+      onSuccess: (data) => {
+        if (data && data.status === 200) {
+          return setDataPartnerDetail(data.data);
+        }
+      },
+      onError: () => {
+        setDataPartnerDetail({});
+      },
+    }
+  );
+
+  // truyền partnerId
+  useEffect(() => {
+    onGetDataPartnerDetail("1dfff740-3b77-4616-c037-08dbaef12d36");
+  }, []);
+
+  console.log("dataPartnerDetail", dataPartnerDetail);
+
   return (
     <>
       <section

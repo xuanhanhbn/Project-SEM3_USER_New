@@ -63,6 +63,7 @@ const LandingPage = () => {
                   <div className="form-field">
                     <div className="select-wrap">
                       <select
+                        aria-label="Causes"
                         name={item.field}
                         onChange={onChange}
                         value={value}

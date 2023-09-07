@@ -25,10 +25,10 @@ function CauseDetailsPage() {
                   </a>
                 </span>
                 <span>
-                  Cause Details <i className="ion-ios-arrow-forward"></i>
+                  Program Details <i className="ion-ios-arrow-forward"></i>
                 </span>
               </p>
-              <h1 className="mb-0 bread">Cause Details</h1>
+              <h1 className="mb-0 bread">Program Details</h1>
             </div>
           </div>
         </div>

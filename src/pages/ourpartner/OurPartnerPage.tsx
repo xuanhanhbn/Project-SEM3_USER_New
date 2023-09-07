@@ -106,8 +106,6 @@ function OurPartnerPage() {
     onGetListPartner();
   }, []);
 
-  console.log("listPartner", listPartner);
-
   const handleReturnListPartner = (item: Partner) => {
     return (
       <div key={item.partnerId} className="column">
