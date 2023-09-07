@@ -48,6 +48,7 @@ import { registerApi } from "./api";
 import { notify } from "utils/common";
 
 import moment from "moment";
+import { Spin } from "antd";
 
 function Copyright(props: any) {
   return (
@@ -116,7 +117,7 @@ const history = useHistory()
     isLoading,
   } = useMutation(registerApi, {
     onSuccess: (data) => {
-      if (data && data.status === 200) {
+      if (data && data.token) {
         notify('Register Success','success')
         history.push('/login')
       } else {
@@ -137,99 +138,7 @@ const history = useHistory()
     onRegister(newDataRequest)
   };
 
-  // render input
-  const renderInput = (item: typeInputLogin) => {
-    if (
-      item.field === "userName" ||
-      item.field === "fullName" ||
-      item.field === "phone" ||
-      item.field === "email"
-    ) {
-      return (
-        <Controller
-          name={item.field}
-          control={control}
-          render={({ field: { onChange, value } }) => {
-            return (
-              <div style={{ marginBottom: 20 }}>
-                <TextField
-                  fullWidth
-                  label={item.placeHolder}
-                  placeholder="carterLeonard"
-                  onChange={onChange}
-                  value={value}
-                />
-                {errors &&
-                  errors[item.field as keyof DataRequestInput] &&
-                  errors[item.field as keyof DataRequestInput]?.message && (
-                    <p
-                      style={{ color: "red" }}
-                      className="text-sm text-red-600"
-                    >
-                      {errors[item.field as keyof DataRequestInput]?.message}
-                    </p>
-                  )}
-              </div>
-            );
-          }}
-        />
-      );
-    }
-    if (item.field === "password") {
-      return (
-        <>
-          <Controller
-            name="password"
-            control={control}
-            defaultValue=""
-            render={({ field: { onChange, value } }) => {
-              return (
-                <>
-                  <FormControl fullWidth>
-                    <InputLabel htmlFor="form-layouts-alignment-password">
-                      Password
-                    </InputLabel>
-                    <OutlinedInput
-                      label="Password"
-                      value={value}
-                      onChange={onChange}
-                      id="form-layouts-alignment-password"
-                      type={values.showPassword ? "text" : "password"}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            edge="end"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            aria-label="toggle password visibility"
-                          >
-                            {values.showPassword ? <EyeOffOutline />: <EyeOutline />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                    {errors.password && (
-                      <p
-                        style={{ color: "red" }}
-                        className="text-sm text-red-600"
-                      >
-                        {errors.password.message}
-                      </p>
-                    )}
-                  </FormControl>
-                </>
-              );
-            }}
-          />
-        </>
-      );
-    }
-  };
 
-  // const handleDisableDate: RangePickerProps['disabledDate'] = (current) => {
-  //   // Can not select days before today and today
-  //   return current && current >= moment().endOf('day');
-  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -443,8 +352,9 @@ const history = useHistory()
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={handleSubmit(onSubmit)}
+              disabled={isLoading}
             >
-              Sign Up
+              {isLoading ? <Spin/> : <div>Register</div>}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

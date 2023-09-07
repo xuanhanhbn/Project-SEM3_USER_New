@@ -70,8 +70,8 @@ const Form = styled("form")(({ theme }) => ({
 }));
 
 const LoginPage = () => {
-const history = useHistory()
-const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
+  const history = useHistory();
+  const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
 
   // ** State
   const [values, setValues] = useState({
@@ -93,7 +93,6 @@ const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
     resolver: yupResolver(validationSchema),
   });
 
-
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
@@ -106,8 +105,9 @@ const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
   const { mutate: onLogin, isLoading } = useMutation(onLoginApi, {
     onSuccess: (data) => {
       if (data && data.token) {
-        onGetUserInfo()
+        onGetUserInfo();
         notify("Login Success", "success");
+        history.push("/");
         localStorage.setItem("loginData", data.token);
       } else {
         notify("An error occurred, please try again.", "error");
@@ -119,10 +119,10 @@ const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
   });
 
   const { mutate: onGetUserInfo } = useMutation(getUserInfo, {
-    onSuccess:async (data) => {
+    onSuccess: async (data) => {
       if (data && data.status === 200) {
         await updateUserInfoData(data?.data);
-        history.push('/')
+        // history.push("/");
       } else {
         notify("An error occurred, please try again.", "error");
       }
@@ -133,7 +133,7 @@ const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
   });
 
   const onSubmit = (data: requestLogin) => {
-    onLogin(data)
+    onLogin(data);
   };
 
   // render input
@@ -253,8 +253,9 @@ const updateUserInfoData = useGlobalStore((state) => state.setUserInfo);
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={handleSubmit(onSubmit)}
+              disabled={isLoading}
             >
-              Sign In
+              {isLoading ? <Spin /> : <div>Sign In</div>}
             </Button>
             <Grid container>
               <Grid item xs>
