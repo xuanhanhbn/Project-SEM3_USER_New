@@ -37,6 +37,7 @@ function ContactPage() {
 
   const onSubmit = (data: requestContact) => {
   };
+  console.log("a");
 
   // render input
   const renderInput = (item: typeInputContact) => {

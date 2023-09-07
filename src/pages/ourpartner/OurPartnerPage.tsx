@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./gird.css";
 import bg from "assets/images/gallery/page-title-bg-1.jpg";
 import pn1 from "assets/images/partners/12ea69e9-8c54-4579-aa09-0e65dae025a9.jpg";
@@ -14,8 +14,14 @@ import pn10 from "assets/images/partners/attachment_109729989.png";
 import pn11 from "assets/images/partners/attachment_113975607.jpg";
 import pn12 from "assets/images/partners/attachment_129000522.jpg";
 import { Link } from "react-router-dom";
-
 import { useSelector } from "react-redux";
+
+import { useMutation } from "@tanstack/react-query";
+import { onGetListPartnerApi } from "./api";
+import { notify } from "utils/common";
+import { Partner } from "types/global";
+import { responsePartnersList } from "./type";
+import { Image } from "antd";
 
 const partnerList = [
   {
@@ -82,8 +88,43 @@ const partnerList = [
 ];
 
 function OurPartnerPage() {
+  // STATE
+  const [listPartner, setListPartner] = useState<Partner[] | []>([]);
+
+  const { mutate: onGetListPartner } = useMutation(onGetListPartnerApi, {
+    onSuccess: (data) => {
+      if (data && data.status === 200) {
+        return setListPartner(data.data);
+      }
+    },
+    onError: () => {
+      setListPartner([]);
+    },
+  });
+
   useEffect(() => {
+    onGetListPartner();
   }, []);
+
+  console.log("listPartner", listPartner);
+
+  const handleReturnListPartner = (item: Partner) => {
+    return (
+      <div key={item.partnerId} className="column">
+        <div>
+          <Link
+            className="card"
+            style={{ color: "black" }}
+            to={`/partnerdetail/${item.partnerId}`}
+          >
+            <Image src={item.partnerThumbnail.path} className="img w-100" />
+
+            {item.name}
+          </Link>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div>
@@ -134,26 +175,9 @@ function OurPartnerPage() {
                   </h1>
                 </div>
                 <div className="row">
-                  {partnerList.map((list) => {
-                    return (
-                      <div key={list.name} className="column">
-                        <div>
-                          <Link
-                            className="card"
-                            style={{ color: "black" }}
-                            to={list.path}
-                          >
-                            <img
-                              style={{ maxHeight: "125px", marginBottom: 10 }}
-                              src={list.img}
-                              alt=""
-                            />
-                            Our {list.name}
-                          </Link>
-                        </div>
-                      </div>
-                    );
-                  })}
+                  {Array.isArray(listPartner) &&
+                    listPartner.length > 0 &&
+                    listPartner.map((item) => handleReturnListPartner(item))}
                 </div>
               </div>
             </div>

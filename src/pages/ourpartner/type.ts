@@ -1,10 +1,4 @@
 export interface responsePartnersList<T> {
-  data: T[];
   status: number;
+  data: T[] | [];
 }
-
-export interface responseDataPartnersList {
-  id:string,
-}
-
-
