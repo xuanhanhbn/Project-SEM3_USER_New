@@ -157,7 +157,7 @@ function CauseDetailsPage() {
     // Đặt thuộc tính href của thẻ <a> thành URL mà bạn muốn chuyển đến
     urlPayPal.href = data?.href;
     // Đặt thuộc tính target để mở liên kết trong cửa sổ mới
-    urlPayPal.target = '_parent	';
+    urlPayPal.target = '_parent';
     urlPayPal.click()
 
     },
