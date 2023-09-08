@@ -158,8 +158,8 @@ function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="py-2 d-block " to="/donation">
-                    Donation
+                  <Link className="py-2 d-block " to="/program">
+                    Program
                   </Link>
                 </li>
               </ul>

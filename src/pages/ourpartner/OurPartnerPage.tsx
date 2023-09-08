@@ -32,7 +32,6 @@ function OurPartnerPage() {
     onGetListPartner();
   }, []);
 
-
   const handleReturnListPartner = (item: Partner) => {
     return (
       <div key={item.partnerId} className="column">

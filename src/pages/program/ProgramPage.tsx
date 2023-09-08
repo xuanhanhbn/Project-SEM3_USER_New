@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import bg2 from "assets/images/carousel/bg_2.jpg";
 import { Link } from "react-router-dom";
+import { Space, Input } from "antd";
+
+const { Search } = Input;
+
+const onSearch = (value: string) => console.log(value);
 
 function CausesPage() {
   // const dispatch = useAppDispatch();
@@ -31,17 +36,31 @@ function CausesPage() {
                   </a>
                 </span>
                 <span>
-                  Causes <i className="ion-ios-arrow-forward"></i>
+                  Program <i className="ion-ios-arrow-forward"></i>
                 </span>
               </p>
-              <h1 className="mb-0 bread">Causes</h1>
+              <h1 className="mb-0 bread">Program</h1>
             </div>
           </div>
         </div>
       </section>
-
+      {/* list program */}
       <section className="ftco-section">
         <div className="container">
+          <div
+            className="d-flex justify-content-center"
+            style={{ padding: "0px 0px 70px" }}
+          >
+            <Space style={{ width: "400px" }} direction="vertical">
+              <Search
+                placeholder="Program name or Partner name"
+                allowClear
+                enterButton="Search"
+                size="large"
+                onSearch={onSearch}
+              />
+            </Space>
+          </div>
           <div className="row">
             <div className="col-md-6 col-lg-3">
               <div className="text-center causes causes-2 ftco-animate">
@@ -72,7 +91,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -108,7 +127,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -144,7 +163,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -180,7 +199,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -216,7 +235,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -252,7 +271,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -288,7 +307,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
@@ -324,7 +343,7 @@ function CausesPage() {
                     </div>
                   </div>
                   <p>
-                    <Link to="/causedetails" className="btn btn-light w-100">
+                    <Link to="/programdetail" className="btn btn-light w-100">
                       Donate Now
                     </Link>
                   </p>
