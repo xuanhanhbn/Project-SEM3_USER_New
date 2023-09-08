@@ -61,7 +61,7 @@ function CauseDetailsPage() {
     if (itemDetails) {
       if (itemDetails?.target > 0 && itemDetails?.totalDonation > 0) {
         const Percentage =
-          (itemDetails?.target / itemDetails?.totalDonation) * 100;
+          (itemDetails?.totalDonation / itemDetails?.target ) * 100;
 
         return Percentage;
       }
@@ -217,7 +217,9 @@ function CauseDetailsPage() {
                         </div>
                         <div className="justify-content-between cause-card__goals d-flex">
                           <p>
-                            <strong>Raised:</strong> $0
+                            <strong>Raised:</strong> $ {itemDetails?.totalDonation
+                              .toString()
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                           </p>
                           <p>
                             <strong>Goal:</strong> ${" "}
@@ -275,7 +277,6 @@ function CauseDetailsPage() {
 
               <div className="result" />
             </div>
-
             <div className="col-lg-4 col-md-12">
               <div className="cause-details__sidebar">
                 <div className="cause-details__organizer">
@@ -311,6 +312,7 @@ function CauseDetailsPage() {
               </div>
             </div>
           </div>
+
         </div>
       </section>
     </>

@@ -41,9 +41,15 @@ function OurPartnerPage() {
             style={{ color: "black" }}
             to={`/partnerdetail/partnerId=${item.partnerId}`}
           >
+            <div style={{height:200}}>
             <Image src={item.partnerThumbnail.path} className="img w-100" alt="Image Partner" />
+            {/* <Image src="https://img1.oto.com.vn/Static/Images/logo/v3/mercedes-benz.png" alt="a" className="img w-100" /> */}
 
+            </div>
+            <div>
             {item.name}
+
+            </div>
           </Link>
         </div>
       </div>
