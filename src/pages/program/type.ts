@@ -3,17 +3,19 @@ export interface responseCausesList<T> {
   status: number;
 }
 
-export interface responseProgramDetail<T>{
-  status:number,
+export interface responseProgramDetail<T> {
+  status: number;
 }
 
 export interface RouteParams {
-  programId:string
+  programId: string;
 }
 
 export interface responseDataCausesList {
-  id:string,
-
+  id: string;
 }
 
-
+export interface responseProgram<T> {
+  status: number;
+  data: T[] | [];
+}

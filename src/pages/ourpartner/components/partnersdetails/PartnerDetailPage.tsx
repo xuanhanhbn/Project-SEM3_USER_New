@@ -113,7 +113,7 @@ function PartnerDetailPage() {
             <Divider />
 
             <div className="col-lg-12">
-              <div  className="title mb-4">
+              <div className="mb-4 title">
                 <h3>Program</h3>
               </div>
               <div className="program">
@@ -128,7 +128,6 @@ function PartnerDetailPage() {
                           className="img w-100"
                           src={itemProgram?.programThumbnail?.path}
                           alt={`Program_${itemDetails.name}_${itemProgram.name}`}
-                          // src="https://img1.oto.com.vn/Static/Images/logo/v3/mercedes-benz.png"
                         />
                         <div className="p-3 text">
                           <h2
@@ -158,14 +157,6 @@ function PartnerDetailPage() {
                               <p>
                                 <span>{`$ ${itemProgram.target}`}</span> to go
                               </p>
-                              {/* <div className="progress" style={{ height: 20 }}>
-                                <div
-                                  className="progress-bar progress-bar-striped"
-                                  style={{ width: "95%", height: 20 }}
-                                >
-                                  {handleCalculatorPercent(itemProgram)}
-                                </div>
-                              </div> */}
                             </div>
                             <p>
                               <Link
