@@ -7,7 +7,7 @@ import { RouterParams } from "pages/ourpartner/type";
 import { PartnerDetail, Program, ProgramByPartner } from "types/global";
 import { useMutation } from "@tanstack/react-query";
 import { onGetListPartnerDetailsApi } from "pages/ourpartner/api";
-import { Image } from "antd";
+import { Divider, Image } from "antd";
 
 import { onGetPartnerDetailApi } from "./api";
 import { notify } from "utils/common";
@@ -81,53 +81,54 @@ function PartnerDetailPage() {
         </div>
       </section>
 
-      <section className="px-3 ftco-section">
+      <section className="px-3 py-5">
         <div className="px-6">
           <div className="row">
-            {/* <div className="col-lg-12"> */}
-            {/* <div className="wrapper">
-                <div className=" row"> */}
-            <div className="col-lg-4">
+            <div className="col-lg-12">
               <div>
-                <div className=" d-flex align-items-center">
+                <div>
                   <div>
                     <Image
                       style={{
                         maxHeight: "80px",
                         marginBottom: 10,
                         border: "1px solid",
-                        borderRadius: "50%",
                         marginRight: 15,
                       }}
+                      // src="https://img1.oto.com.vn/Static/Images/logo/v3/mercedes-benz.png"
                       src={itemDetails?.partnerThumbnail?.path}
                       alt={`Image_Partner_${itemDetails?.name}`}
                     />
                   </div>
                   <div>
-                    <h3>{itemDetails?.name}</h3>
+                    <h3>{`Name: ${itemDetails?.name}`}</h3>
                   </div>
                 </div>
                 <div className="contact">
                   <h3>{`Email: ${itemDetails?.email}`}</h3>
                 </div>
-                <div className="content">{itemDetails?.description}</div>
+                {/* <div className="content">{itemDetails?.description}</div> */}
               </div>
             </div>
-            <div className="col-lg-8">
-              <div style={{ minHeight: 100 }} className="title">
-                <h1>Program</h1>
+            <Divider />
+
+            <div className="col-lg-12">
+              <div  className="title mb-4">
+                <h3>Program</h3>
               </div>
               <div className="program">
                 <div className="row">
                   {itemDetails?.programs.map((itemProgram) => (
                     <div
-                      className="col-md-6 col-lg-4"
+                      className="col-md-6 col-lg-3"
                       key={itemProgram.programId}
                     >
                       <div className="text-center causes causes-2 ftco-animate">
                         <Image
                           className="img w-100"
                           src={itemProgram?.programThumbnail?.path}
+                          alt={`Program_${itemDetails.name}_${itemProgram.name}`}
+                          // src="https://img1.oto.com.vn/Static/Images/logo/v3/mercedes-benz.png"
                         />
                         <div className="p-3 text">
                           <h2
@@ -157,21 +158,21 @@ function PartnerDetailPage() {
                               <p>
                                 <span>{`$ ${itemProgram.target}`}</span> to go
                               </p>
-                              <div className="progress" style={{ height: 20 }}>
+                              {/* <div className="progress" style={{ height: 20 }}>
                                 <div
                                   className="progress-bar progress-bar-striped"
                                   style={{ width: "95%", height: 20 }}
                                 >
-                                  {/* {handleCalculatorPercent(itemProgram)} */}
+                                  {handleCalculatorPercent(itemProgram)}
                                 </div>
-                              </div>
+                              </div> */}
                             </div>
                             <p>
                               <Link
-                                to="/causedetails"
+                                to={`/Programdetail/${itemProgram.programId}`}
                                 className="btn btn-light w-100"
                               >
-                                Donate Now
+                                View Details
                               </Link>
                             </p>
                           </div>
@@ -182,9 +183,6 @@ function PartnerDetailPage() {
                 </div>
               </div>
             </div>
-            {/* </div> */}
-            {/* {/* </div> */}
-            {/* </div> */}
           </div>
         </div>
       </section>
