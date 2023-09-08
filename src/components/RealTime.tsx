@@ -1,7 +1,8 @@
 import React from 'react'
 import moment from 'moment';
 
-type Props = {}
+type Props = {
+}
 
 const RealTime = (props: Props) => {
   const time = props
