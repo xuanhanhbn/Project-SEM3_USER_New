@@ -16,33 +16,17 @@ import { useForm, Controller } from "react-hook-form";
 import {
   DataRequestInput,
   inputHomeDonate,
-  listCauses,
   typeInputDonate,
   validationSchema,
-} from "pages/donation/contants";
+} from "pages/program/components/programdetail/contants";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { number } from "yup";
+import { log } from "console";
 
 function CauseDetailsPage() {
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<DataRequestInput>({
-    mode: "all",
-    criteriaMode: "all",
-    defaultValues: {
-      fullName: "",
-      email: "",
-      reason: "",
-      amount: "",
-    },
-    resolver: yupResolver(validationSchema),
-  });
   const { programId } = useParams<RouteParams>();
-
   const sliceString = programId?.replace("programId=", "");
   const [itemDetails, setItemDetails] = useState<ProgramDetail>();
-
   const { mutate: getListDetails } = useMutation(getProgramDetails, {
     onSuccess: (data) => {
       setItemDetails(data);
@@ -70,7 +54,42 @@ function CauseDetailsPage() {
     return Percentage;
   };
 
-  const onSubmit = (data: any) => console.log(data);
+  // list reason
+  const reason = () => {
+    const listReason = [
+      {
+        field: "",
+        value: "",
+      },
+    ];
+
+    itemDetails?.donationReason.map((list, index) => {
+      return listReason.push({
+        field: `${index}`,
+        value: `${list}`,
+      });
+    });
+
+    return listReason;
+  };
+  const listReason = reason();
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<DataRequestInput>({
+    mode: "all",
+    criteriaMode: "all",
+    defaultValues: {
+      programId: `${sliceString}`,
+      reason: "",
+      amount: 0,
+    },
+    resolver: yupResolver(validationSchema),
+  });
+
+  const onSubmit = (data: any) => console.log("data", data);
 
   // render input
   const renderInput = (item: typeInputDonate) => {
@@ -93,9 +112,9 @@ function CauseDetailsPage() {
                         value={value}
                         className="form-control"
                       >
-                        {listCauses.map((list) => {
+                        {listReason.map((list) => {
                           return (
-                            <option key={list.field} value={list.field}>
+                            <option key={list.field} value={list.value}>
                               {list.value}
                             </option>
                           );
@@ -125,7 +144,7 @@ function CauseDetailsPage() {
           <Controller
             name={item.field}
             control={control}
-            defaultValue=""
+            defaultValue={0}
             render={({ field }) => (
               <div className="">
                 <div className="form-group">
