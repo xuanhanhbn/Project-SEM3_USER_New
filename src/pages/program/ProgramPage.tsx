@@ -1,20 +1,135 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import bg2 from "assets/images/carousel/bg_2.jpg";
 import { Link } from "react-router-dom";
-import { Space, Input } from "antd";
+import { Space, Input, Image } from "antd";
+import { Program } from "types/global";
+import { useMutation } from "@tanstack/react-query";
+import { onGetListProgramApi } from "./api";
+import Loading from "components/Loading";
 
 const { Search } = Input;
 
-const onSearch = (value: string) => console.log(value);
-
 function CausesPage() {
-  // const dispatch = useAppDispatch();
-  // const globalData = useSelector(makeSelectCauses);
-  // const dataCauses = globalData?.list;
-  // console.log("causes", dataCauses);
-  // useEffect(() => {
-  //   dispatch(causesActions.getListCauses());
-  // }, []);
+  // STATE
+  const [listProgram, setListProgram] = useState<Program[] | []>([]);
+  // SEARCH
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const onSearch = (value: string) => {
+    onGetListProgram(value);
+  };
+
+  const { mutate: onGetListProgram } = useMutation(onGetListProgramApi, {
+    onSuccess: (data) => {
+      if (data && data.status === 200) {
+        return setListProgram(data.data);
+      }
+    },
+    onError: () => {
+      setListProgram([]);
+    },
+  });
+
+  useEffect(() => {
+    onGetListProgram("");
+  }, []);
+
+  const handleCalculatorPercent = (item: Program) => {
+    const Percentage = 0;
+    if (item?.target > 0 && item?.totalDonation > 0) {
+      const Percentage = (item?.totalDonation / item?.target) * 100;
+
+      console.log("Percentage: ", Percentage);
+
+      return Percentage;
+    }
+
+    return Percentage;
+  };
+
+  const handleReturnListProgram = (item: Program) => {
+    if (!item.isClosed) {
+      return (
+        <div
+          className="col-md-6 col-lg-3"
+          key={`${item.name}_${item.programId}`}
+        >
+          <div className="text-center causes causes-2 ">
+            <Image
+              src={item.programThumbnail.path}
+              alt={`Image_Program_${item?.name}`}
+              className="img w-100"
+            />
+            <div className="p-3 text">
+              <h2
+                style={{
+                  textOverflow: "ellipsis",
+                  maxHeight: "3em",
+                  overflow: "hidden",
+                  minHeight: "60px",
+                }}
+              >
+                <a href="">{item.name}</a>
+              </h2>
+              <div
+                style={{
+                  textOverflow: "ellipsis",
+                  maxHeight: "4.5em",
+                  overflow: "hidden",
+                  WebkitLineClamp: 3,
+                  minHeight: "72px",
+                }}
+              >
+                <p>{item.description}</p>
+              </div>
+
+              <div className="mb-4 goal">
+                <p>
+                  <span>$ {item.target}</span> to go
+                </p>
+                <div className="progress" style={{ height: "20px" }}>
+                  <div
+                    className="progress-bar progress-bar-striped"
+                    style={{
+                      width: handleCalculatorPercent(item),
+                      height: "20px",
+                    }}
+                  >
+                    {handleCalculatorPercent(item)} %
+                  </div>
+                </div>
+              </div>
+              <p>
+                <Link
+                  className="btn btn-light w-100"
+                  to={{
+                    pathname: `/Programdetail/programId=${item?.programId}`,
+                  }}
+                >
+                  Donate Now
+                </Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  };
+
+  console.log("listProgram", listProgram);
+
+  // srearch
+
+  // const filterProgram = () => {
+  //   return listProgram.filter((program) => {
+  //     return (
+  //       program.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //       program.partner.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //     );
+  //   });
+  // };
+
+  console.log("searchTerm", searchTerm);
 
   return (
     <div>
@@ -62,294 +177,10 @@ function CausesPage() {
             </Space>
           </div>
           <div className="row">
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ftco-animate">
-                <a
-                  href="#"
-                  className="img w-100"
-                  style={{ backgroundImage: `url(  ${bg2})` }}
-                />
-                <div className="p-3 text">
-                  <h2>
-                    <a href="#">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: 20 }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "70%", height: 20 }}
-                      >
-                        70%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link to="/programdetail" className="btn btn-light w-100">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ftco-animate">
-                <a
-                  href="#"
-                  className="img w-100"
-                  style={{ backgroundImage: `url(  ${bg2})` }}
-                />
-                <div className="p-3 text">
-                  <h2>
-                    <a href="#">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: 20 }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "82%", height: 20 }}
-                      >
-                        82%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link to="/programdetail" className="btn btn-light w-100">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ftco-animate">
-                <a
-                  href="#"
-                  className="img w-100"
-                  style={{ backgroundImage: `url(  ${bg2})` }}
-                />
-                <div className="p-3 text">
-                  <h2>
-                    <a href="#">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: 20 }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "95%", height: 20 }}
-                      >
-                        95%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link to="/programdetail" className="btn btn-light w-100">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ftco-animate">
-                <a
-                  href="#"
-                  className="img w-100"
-                  style={{ backgroundImage: `url(  ${bg2})` }}
-                />
-                <div className="p-3 text">
-                  <h2>
-                    <a href="#">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: 20 }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "75%", height: 20 }}
-                      >
-                        75%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link to="/programdetail" className="btn btn-light w-100">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ftco-animate">
-                <a
-                  href="#"
-                  className="img w-100"
-                  style={{ backgroundImage: `url(  ${bg2})` }}
-                />
-                <div className="p-3 text">
-                  <h2>
-                    <a href="#">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: 20 }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "70%", height: 20 }}
-                      >
-                        70%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link to="/programdetail" className="btn btn-light w-100">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ftco-animate">
-                <a
-                  href="#"
-                  className="img w-100"
-                  style={{ backgroundImage: `url(  ${bg2})` }}
-                />
-                <div className="p-3 text">
-                  <h2>
-                    <a href="#">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: 20 }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "82%", height: 20 }}
-                      >
-                        82%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link to="/programdetail" className="btn btn-light w-100">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ftco-animate">
-                <a
-                  href="#"
-                  className="img w-100"
-                  style={{ backgroundImage: `url(  ${bg2})` }}
-                />
-                <div className="p-3 text">
-                  <h2>
-                    <a href="#">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: 20 }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "95%", height: 20 }}
-                      >
-                        95%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link to="/programdetail" className="btn btn-light w-100">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
-              <div className="text-center causes causes-2 ftco-animate">
-                <a
-                  href="#"
-                  className="img w-100"
-                  style={{ backgroundImage: `url(  ${bg2})` }}
-                />
-                <div className="p-3 text">
-                  <h2>
-                    <a href="#">Save the poor children from hunger</a>
-                  </h2>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia
-                  </p>
-                  <div className="mb-4 goal">
-                    <p>
-                      <span>$3,800</span> to go
-                    </p>
-                    <div className="progress" style={{ height: 20 }}>
-                      <div
-                        className="progress-bar progress-bar-striped"
-                        style={{ width: "75%", height: 20 }}
-                      >
-                        75%
-                      </div>
-                    </div>
-                  </div>
-                  <p>
-                    <Link to="/programdetail" className="btn btn-light w-100">
-                      Donate Now
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
+            {Array.isArray(listProgram) &&
+              listProgram.length > 0 &&
+              listProgram.map((item) => handleReturnListProgram(item))}
+            {/* {listProgram.map((item) => handleReturnListProgram(item))} */}
           </div>
           <div className="mt-5 row">
             <div className="text-center col">

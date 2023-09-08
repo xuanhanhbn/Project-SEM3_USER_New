@@ -3,34 +3,18 @@ import React, { useState } from "react";
 import bg from "assets/images/gallery/page-title-bg-1.jpg";
 import about from "assets/images/background/about-3.jpg";
 
-import RadioGroup from "@mui/material/RadioGroup";
-import Radio from "@mui/material/Radio";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import { InputNumber, Space } from "antd";
-
-import FormControl from "@mui/material/FormControl";
 
 import {
   DataRequestInput,
   inputHomeDonate,
-  listCauses,
-  radioPayload,
   typeInputDonate,
   validationSchema,
 } from "./contants";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
-import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { log } from "console";
-import { number } from "yup";
-
-import { useMutation } from "@tanstack/react-query";
-import { notify } from "utils/common";
-import { onPaymentApi } from "./api";
 
 function DonationPage() {
-  const [showPayButton, setShowPayButton] = useState(false);
-
   const {
     handleSubmit,
     control,
@@ -51,50 +35,6 @@ function DonationPage() {
 
   // render input
   const renderInput = (item: typeInputDonate) => {
-    // if (item.field === "selectCauses") {
-    //   return (
-    //     <Controller
-    //       name="selectCauses"
-    //       control={control}
-    //       render={({ field: { onChange, value } }) => {
-    //         return (
-    //           <div className="">
-    //             <div className="form-group">
-    //               <label htmlFor="name">Causes</label>
-    //               <div className="form-field">
-    //                 <div className="select-wrap">
-    //                   <select
-    //                     name={item.field}
-    //                     onChange={onChange}
-    //                     value={value}
-    //                     className="form-control"
-    //                   >
-    //                     {listCauses.map((list) => {
-    //                       return (
-    //                         <option key={list.field} value={list.field}>
-    //                           {list.value}
-    //                         </option>
-    //                       );
-    //                     })}
-    //                   </select>
-    //                 </div>
-    //                 {errors.selectCauses && (
-    //                   <p
-    //                     style={{ color: " #FFCC47" }}
-    //                     className="text-sm text-red-600"
-    //                   >
-    //                     {errors.selectCauses.message}
-    //                   </p>
-    //                 )}
-    //               </div>
-    //             </div>
-    //           </div>
-    //         );
-    //       }}
-    //     />
-    //   );
-    // }
-
     if (item.field === "amount") {
       return (
         <>
@@ -135,21 +75,6 @@ function DonationPage() {
       );
     }
   };
-
-  // Call api
-  // const { mutate: onCreateDonation, isLoading } = useMutation(onPaymentApi, {
-  //   onSuccess: (data) => {
-  //     // if (data && data.token) {
-  //     //   notify("Login Success", "success");
-  //     // } else {
-  //     //   notify("An error occurred, please try again.", "error");
-  //     // }
-  //     console.log(data);
-  //   },
-  //   onError: () => {
-  //     notify("An error occurred, please try again.", "error");
-  //   },
-  // });
 
   return (
     <>
