@@ -23,6 +23,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { onPaymentApi, onRegisterVolunteerApi } from "./api";
 import { notify } from "utils/common";
 import { Button } from "@mui/material";
+import Loading from "components/Loading";
 
 function CauseDetailsPage() {
   const history = useHistory()
@@ -33,7 +34,6 @@ function CauseDetailsPage() {
   const [itemDetails, setItemDetails] = useState<ProgramDetail>();
   const [isOpenModalVolunteer,setIsOpenModalVolunteer] = useState<boolean>(false)
   const [isCheckEnroll,setIsCheckEnroll] = useState<boolean>(false)
-  const [urlPayPal, setUrlPayPal] = useState('')
 
   const {
     handleSubmit,
@@ -49,7 +49,7 @@ function CauseDetailsPage() {
     resolver: yupResolver(validationSchema),
   });
 
-  const { mutate: getListDetails } = useMutation(getProgramDetails, {
+  const { mutate: getListDetails,isLoading } = useMutation(getProgramDetails, {
     onSuccess: (data) => {
       setItemDetails(data);
     },
@@ -58,15 +58,13 @@ function CauseDetailsPage() {
 
   useEffect(() => {
     if(itemDetails) {
-      if(itemDetails?.currentUserEnrollment.programId === itemDetails?.programId) {
+      if(itemDetails?.currentUserEnrollment?.programId === itemDetails?.programId) {
         return setIsCheckEnroll(true)
       }
       return setIsCheckEnroll(false)
 
     }
   },[itemDetails])
-
-
 
   useEffect(() => {
     if (sliceString) {
@@ -106,11 +104,14 @@ function CauseDetailsPage() {
 
     return listReason;
   };
+
   const listReason = reason();
 
   const { mutate: onRegisterVolunteer } = useMutation(onRegisterVolunteerApi, {
     onSuccess: (data) => {
       setIsOpenModalVolunteer(false)
+      getListDetails({ programId: sliceString })
+
       return notify("Register Success ",'success');
 
     },
@@ -119,39 +120,8 @@ function CauseDetailsPage() {
     },
   });
 
-  // Lấy thẻ div trong HTML để chèn thẻ <a> vào
 
-// Gọi API (ví dụ: dùng fetch)
-// fetch('https://api.example.com/data')
-//   .then(response => response.json())
-//   .then(data => {
-//     // Tạo thẻ <a>
-//     const link = document.createElement('a');
-
-//     // Đặt thuộc tính href của thẻ <a> thành URL mà bạn muốn chuyển đến
-//     link.href = 'https://example.com/newpage';
-
-//     // Đặt nội dung của thẻ <a>
-//     link.textContent = 'Chuyển đến trang khác';
-
-//     // Đặt thuộc tính target để mở liên kết trong cửa sổ mới
-//     link.target = '_blank';
-
-//     // Chèn thẻ <a> vào thẻ div
-//     divContainer.appendChild(link);
-
-//     // Gắn sự kiện click vào thẻ <a> để thực hiện chuyển trang
-//     link.addEventListener('click', (event) => {
-//       event.preventDefault(); // Ngăn chuyển hướng mặc định của thẻ <a>
-//       window.location.href = link.href; // Chuyển đến URL đã đặt
-//     });
-//   })
-//   .catch(error => {
-//     console.error('Error:', error);
-//   });
-
-
-  const { mutate: onDonationMutation,isLoading } = useMutation(onPaymentApi, {
+  const { mutate: onDonationMutation } = useMutation(onPaymentApi, {
     onSuccess: (data) => {
     const urlPayPal = document.createElement('a');
     // Đặt thuộc tính href của thẻ <a> thành URL mà bạn muốn chuyển đến
@@ -270,7 +240,8 @@ function CauseDetailsPage() {
   };
 
   return (
-    <>
+    <div>
+    <Loading isLoading={isLoading}/>
       <section
         className="hero-wrap hero-wrap-2"
         style={{
@@ -438,7 +409,7 @@ function CauseDetailsPage() {
          <p>Are you sure you want to register for this program? By registering, you will have access to the program's activities and contribute to it.</p>
        </Modal>
       )}
-    </>
+    </div>
   );
 }
 

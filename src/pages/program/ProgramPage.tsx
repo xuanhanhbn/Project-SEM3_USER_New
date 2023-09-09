@@ -12,14 +12,12 @@ const { Search } = Input;
 function CausesPage() {
   // STATE
   const [listProgram, setListProgram] = useState<Program[] | []>([]);
-  // SEARCH
-  const [searchTerm, setSearchTerm] = useState("");
 
   const onSearch = (value: string) => {
     onGetListProgram(value);
   };
 
-  const { mutate: onGetListProgram } = useMutation(onGetListProgramApi, {
+  const { mutate: onGetListProgram,isLoading } = useMutation(onGetListProgramApi, {
     onSuccess: (data) => {
       if (data && data.status === 200) {
         return setListProgram(data.data);
@@ -116,23 +114,10 @@ function CausesPage() {
     }
   };
 
-  console.log("listProgram", listProgram);
-
-  // srearch
-
-  // const filterProgram = () => {
-  //   return listProgram.filter((program) => {
-  //     return (
-  //       program.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //       program.partner.name.toLowerCase().includes(searchTerm.toLowerCase())
-  //     );
-  //   });
-  // };
-
-  console.log("searchTerm", searchTerm);
 
   return (
     <div>
+      <Loading isLoading={isLoading} />
       <section
         className="hero-wrap hero-wrap-2"
         style={{
