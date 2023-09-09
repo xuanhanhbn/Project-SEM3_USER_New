@@ -9,7 +9,11 @@ const useStyles: any = makeStyles((theme: any) => ({
   },
 }));
 
-const Loading = (props: any) => {
+type Props = {
+  isLoading:boolean
+}
+
+const Loading = (props: Props) => {
   const { isLoading } = props;
   const classes = useStyles();
 
