@@ -13,6 +13,13 @@ import Radio from "@mui/material/Radio";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 import FormControl from "@mui/material/FormControl";
+import { grey } from "@mui/material/colors";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import Diversity1Icon from "@mui/icons-material/Diversity1";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import SavingsIcon from "@mui/icons-material/Savings";
+import BalanceIcon from "@mui/icons-material/Balance";
 
 import {
   DataRequestInput,
@@ -323,12 +330,12 @@ const LandingPage = () => {
                 <div className="col-md-6 d-flex counter-wrap">
                   <div className="block-18 d-flex justify-content-center">
                     <div className="icon d-flex align-items-center justify-content-center">
-                      <span className="flaticon-volunteer"></span>
+                      <VolunteerActivismIcon sx={{ fontSize: 30 }} />
                     </div>
                     <div className="mx-4">
                       <div className="text">
                         <strong className="number" data-number="50">
-                          0
+                          1,527
                         </strong>
                       </div>
                       <div className="text">
@@ -340,12 +347,12 @@ const LandingPage = () => {
                 <div className="col-md-6 d-flex counter-wrap">
                   <div className="block-18 d-flex justify-content-center">
                     <div className="icon d-flex align-items-center justify-content-center">
-                      <span className="flaticon-piggy-bank"></span>
+                      <AccountBalanceIcon sx={{ fontSize: 30 }} />
                     </div>
                     <div className="mx-4">
                       <div className="text">
                         <strong className="number" data-number="24400">
-                          0
+                          327
                         </strong>
                       </div>
                       <div className="text">
@@ -383,7 +390,7 @@ const LandingPage = () => {
                   }}
                 >
                   <div className="icon d-flex align-items-center justify-content-center">
-                    <span className="flaticon-volunteer"></span>
+                    <Diversity1Icon sx={{ fontSize: 50 }} />
                   </div>
                 </div>
               </div>
@@ -407,7 +414,7 @@ const LandingPage = () => {
                   }}
                 >
                   <div className="icon d-flex align-items-center justify-content-center">
-                    <span className="flaticon-piggy-bank"></span>
+                    <FavoriteIcon sx={{ fontSize: 50 }} />
                   </div>
                 </div>
               </div>
@@ -431,7 +438,7 @@ const LandingPage = () => {
                   }}
                 >
                   <div className="icon d-flex align-items-center justify-content-center">
-                    <span className="flaticon-donation"></span>
+                    <SavingsIcon sx={{ fontSize: 50 }} />
                   </div>
                 </div>
               </div>
@@ -455,7 +462,7 @@ const LandingPage = () => {
                   }}
                 >
                   <div className="icon d-flex align-items-center justify-content-center">
-                    <span className="flaticon-ecological"></span>
+                    <BalanceIcon sx={{ fontSize: 50 }} />
                   </div>
                 </div>
               </div>

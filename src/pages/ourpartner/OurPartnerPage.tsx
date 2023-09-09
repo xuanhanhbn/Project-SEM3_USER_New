@@ -11,8 +11,6 @@ import { Partner } from "types/global";
 import { responsePartnersList } from "./type";
 import { Image } from "antd";
 
-
-
 function OurPartnerPage() {
   // STATE
   const [listPartner, setListPartner] = useState<Partner[] | []>([]);
@@ -41,15 +39,15 @@ function OurPartnerPage() {
             style={{ color: "black" }}
             to={`/partnerdetail/partnerId=${item.partnerId}`}
           >
-            <div style={{height:200}}>
-            <Image src={item.partnerThumbnail.path} className="img w-100" alt="Image Partner" />
-            {/* <Image src="https://img1.oto.com.vn/Static/Images/logo/v3/mercedes-benz.png" alt="a" className="img w-100" /> */}
-
+            <div style={{ height: 200 }}>
+              <Image
+                src={item.partnerThumbnail.path}
+                className="img w-100"
+                alt="Image Partner"
+              />
+              {/* <Image src="https://img1.oto.com.vn/Static/Images/logo/v3/mercedes-benz.png" alt="a" className="img w-100" /> */}
             </div>
-            <div>
-            {item.name}
-
-            </div>
+            <div>{item.name}</div>
           </Link>
         </div>
       </div>
@@ -71,9 +69,9 @@ function OurPartnerPage() {
             <div className="pb-5 col-md-9">
               <p className="mb-2 breadcrumbs">
                 <span className="mr-2">
-                  <a href="index.html">
+                  <Link to="/">
                     Home <i className="ion-ios-arrow-forward"></i>
-                  </a>
+                  </Link>
                 </span>
                 <span>
                   Our partners <i className="ion-ios-arrow-forward"></i>

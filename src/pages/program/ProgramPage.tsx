@@ -6,6 +6,7 @@ import { Program } from "types/global";
 import { useMutation } from "@tanstack/react-query";
 import { onGetListProgramApi } from "./api";
 import Loading from "components/Loading";
+import { log } from "console";
 
 const { Search } = Input;
 
@@ -116,8 +117,6 @@ function CausesPage() {
     }
   };
 
-  console.log("listProgram", listProgram);
-
   // srearch
 
   // const filterProgram = () => {
@@ -146,9 +145,9 @@ function CausesPage() {
             <div className="pb-5 col-md-9">
               <p className="mb-2 breadcrumbs">
                 <span className="mr-2">
-                  <a href="index.html">
+                  <Link to="/">
                     Home <i className="ion-ios-arrow-forward"></i>
-                  </a>
+                  </Link>
                 </span>
                 <span>
                   Program <i className="ion-ios-arrow-forward"></i>
