@@ -18,7 +18,7 @@ export const getProgramDetails = (
 export const onGetListProgramApi = (
   params: string
 ): Promise<responseProgram<Program>> => {
-  const url = `Program?search=${params}&isActive=false&page=0&size=10`;
+  const url = `Program?search=${params}&isActive=false&page=0&size=100`;
   return new Promise((resolve, reject) =>
     baseApiAuth
       .get(url)

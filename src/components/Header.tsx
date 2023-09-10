@@ -76,9 +76,9 @@ const Header = () => {
 
   const handleClickItemsDropdown: MenuProps["onClick"] = (config) => {
     // Khi click vaof about ở drop down
-    if (config.key === "1") {
-      console.log("ABOUT");
-    }
+    // if (config.key === "1") {
+    //   console.log("ABOUT");
+    // }
     // Click vao Logout
     if (config.key === "2") {
       localStorage.removeItem("loginData");
