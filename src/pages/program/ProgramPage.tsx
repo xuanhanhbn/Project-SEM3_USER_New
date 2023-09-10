@@ -6,6 +6,7 @@ import { Program } from "types/global";
 import { useMutation } from "@tanstack/react-query";
 import { onGetListProgramApi } from "./api";
 import Loading from "components/Loading";
+import { log } from "console";
 
 const { Search } = Input;
 
@@ -17,16 +18,19 @@ function CausesPage() {
     onGetListProgram(value);
   };
 
-  const { mutate: onGetListProgram,isLoading } = useMutation(onGetListProgramApi, {
-    onSuccess: (data) => {
-      if (data && data.status === 200) {
-        return setListProgram(data.data);
-      }
-    },
-    onError: () => {
-      setListProgram([]);
-    },
-  });
+  const { mutate: onGetListProgram, isLoading } = useMutation(
+    onGetListProgramApi,
+    {
+      onSuccess: (data) => {
+        if (data && data.status === 200) {
+          return setListProgram(data.data);
+        }
+      },
+      onError: () => {
+        setListProgram([]);
+      },
+    }
+  );
 
   useEffect(() => {
     onGetListProgram("");
@@ -114,7 +118,6 @@ function CausesPage() {
     }
   };
 
-
   return (
     <div>
       <Loading isLoading={isLoading} />
@@ -131,9 +134,9 @@ function CausesPage() {
             <div className="pb-5 col-md-9">
               <p className="mb-2 breadcrumbs">
                 <span className="mr-2">
-                  <a href="index.html">
+                  <Link to="/">
                     Home <i className="ion-ios-arrow-forward"></i>
-                  </a>
+                  </Link>
                 </span>
                 <span>
                   Program <i className="ion-ios-arrow-forward"></i>

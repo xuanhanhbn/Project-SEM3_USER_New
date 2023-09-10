@@ -7,15 +7,19 @@ import person1 from "assets/images/business/person_1.jpg";
 import person2 from "assets/images/business/person_2.jpg";
 import person3 from "assets/images/business/person_3.jpg";
 import person4 from "assets/images/business/person_4.jpg";
+import { Link } from "react-router-dom";
+
+import BloodtypeIcon from "@mui/icons-material/Bloodtype";
+import VaccinesIcon from "@mui/icons-material/Vaccines";
+import LunchDiningIcon from "@mui/icons-material/LunchDining";
+import SchoolIcon from "@mui/icons-material/School";
+
+import CountUp from "react-countup";
 
 const AboutPage = () => {
-
-
   useEffect(() => {
     // dispatch(aboutActions.getListAbout());
   }, []);
-  console.log('s');
-  
 
   return (
     <>
@@ -32,9 +36,9 @@ const AboutPage = () => {
             <div className="pb-5 col-md-9">
               <p className="mb-2 breadcrumbs">
                 <span className="mr-2">
-                  <a href="index.html">
+                  <Link to="/">
                     Home <i className="ion-ios-arrow-forward"></i>
-                  </a>
+                  </Link>
                 </span>
                 <span>
                   About us <i className="ion-ios-arrow-forward"></i>
@@ -61,21 +65,19 @@ const AboutPage = () => {
             <div className="col-md-6 pr-md-5 py-md-5">
               <div className="mb-4 heading-section pt-md-5">
                 <span className="subheading">About us</span>
-                <h2 className="mb-2">Give a helping hand to a needy people</h2>
+                <h2 className="mb-2">What is Give-AID mission?</h2>
                 <p>
-                  A small river named Duden flows by their place and supplies it
-                  with the necessary regelialia. It is a paradisematic country,
-                  in which roasted parts of sentences fly into your mouth.
+                  Give-AID is a humanitarian aid organization, active in all 50
+                  states and more than 90 countries, with a mission to improve
+                  the health and lives of people affected by poverty or
+                  emergencies – without regard to politics, religion, or ability
+                  to pay.
                 </p>
+
                 <p>
-                  A small river named Duden flows by their place and supplies it
-                  with the necessary regelialia. It is a paradisematic country,
-                  in which roasted parts of sentences fly into your mouth.
-                </p>
-                <p>
-                  <a href="#" className="btn btn-secondary">
+                  <Link to="/program" className="btn btn-secondary">
                     Become a Volunteer
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
@@ -94,7 +96,7 @@ const AboutPage = () => {
           <div className="row">
             <div className="text-center col-md-3 services-2 w-100">
               <div className="icon icon-1 d-flex align-items-center justify-content-center">
-                <span className="flaticon-water-drop"></span>
+                <BloodtypeIcon sx={{ fontSize: 70 }} color="primary" />
               </div>
               <div className="text">
                 <h4>Water</h4>
@@ -106,7 +108,7 @@ const AboutPage = () => {
             </div>
             <div className="text-center col-md-3 services-2 w-100">
               <div className="icon icon-2 d-flex align-items-center justify-content-center">
-                <span className="flaticon-stethoscope"></span>
+                <VaccinesIcon sx={{ fontSize: 70 }} color="primary" />
               </div>
               <div className="text">
                 <h4>Medical</h4>
@@ -118,7 +120,7 @@ const AboutPage = () => {
             </div>
             <div className="text-center col-md-3 services-2 w-100">
               <div className="icon icon-3 d-flex align-items-center justify-content-center">
-                <span className="flaticon-bread"></span>
+                <LunchDiningIcon sx={{ fontSize: 70 }} color="primary" />
               </div>
               <div className="text">
                 <h4>Food</h4>
@@ -130,7 +132,7 @@ const AboutPage = () => {
             </div>
             <div className="text-center col-md-3 services-2 w-100">
               <div className="icon icon-4 d-flex align-items-center justify-content-center">
-                <span className="flaticon-university"></span>
+                <SchoolIcon sx={{ fontSize: 70 }} color="primary" />
               </div>
               <div className="text">
                 <h4>Education</h4>
@@ -154,9 +156,9 @@ const AboutPage = () => {
               >
                 We're on a mission to help all your problems
               </h2>
-              <a href="#" className="btn btn-white btn-outline-white">
+              <Link to="/program" className="btn btn-white btn-outline-white">
                 Donate Now
-              </a>
+              </Link>
             </div>
             <div className="col-md-9">
               <div className="row">
@@ -164,7 +166,13 @@ const AboutPage = () => {
                   <div className="text-center block-18">
                     <div className="text">
                       <strong className="number" data-number="88984">
-                        0
+                        <CountUp
+                          enableScrollSpy
+                          className="number"
+                          start={0}
+                          end={6527}
+                          duration={2.75}
+                        />
                       </strong>
                     </div>
                     <div className="text">
@@ -176,7 +184,13 @@ const AboutPage = () => {
                   <div className="text-center block-18">
                     <div className="text">
                       <strong className="number" data-number="65000">
-                        0
+                        <CountUp
+                          enableScrollSpy
+                          className="number"
+                          start={0}
+                          end={1527}
+                          duration={2.75}
+                        />
                       </strong>
                     </div>
                     <div className="text">
@@ -188,7 +202,13 @@ const AboutPage = () => {
                   <div className="text-center block-18">
                     <div className="text">
                       <strong className="number" data-number="77000">
-                        0
+                        <CountUp
+                          enableScrollSpy
+                          className="number"
+                          start={0}
+                          end={711527}
+                          duration={2.75}
+                        />
                       </strong>
                     </div>
                     <div className="text">
@@ -200,7 +220,13 @@ const AboutPage = () => {
                   <div className="text-center block-18">
                     <div className="text">
                       <strong className="number" data-number="50">
-                        0
+                        <CountUp
+                          enableScrollSpy
+                          className="number"
+                          start={0}
+                          end={4527}
+                          duration={2.75}
+                        />
                       </strong>
                     </div>
                     <div className="text">
@@ -394,9 +420,9 @@ const AboutPage = () => {
             </div>
             <div className="col-md-4 col-lg-4 d-flex align-items-center justify-content-end">
               <p className="mb-0">
-                <a href="#" className="px-4 py-3 btn btn-primary">
+                <Link to="/program" className="px-4 py-3 btn btn-primary">
                   Become A Volunteer
-                </a>
+                </Link>
               </p>
             </div>
           </div>

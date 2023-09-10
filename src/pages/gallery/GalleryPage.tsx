@@ -13,6 +13,7 @@ import image10 from "assets/images/gallery/Gallery-9.jpg";
 import image11 from "assets/images/gallery/Gallery-10.jpg";
 import image12 from "assets/images/gallery/Gallery-11.jpg";
 import { Image, Col, Divider, Row } from "antd";
+import { Link } from "react-router-dom";
 
 const imageItems = [
   image1,
@@ -45,9 +46,9 @@ function GalleryPage() {
             <div className="pb-5 col-md-9">
               <p className="mb-2 breadcrumbs">
                 <span className="mr-2">
-                  <a href="index.html">
+                  <Link to="/">
                     Home <i className="ion-ios-arrow-forward"></i>
-                  </a>
+                  </Link>
                 </span>
                 <span>
                   Gallery <i className="ion-ios-arrow-forward"></i>

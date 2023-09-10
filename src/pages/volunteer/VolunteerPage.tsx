@@ -22,6 +22,7 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function VolunteerPage() {
   const {
@@ -99,9 +100,9 @@ function VolunteerPage() {
             <div className="pb-5 col-md-9">
               <p className="mb-2 breadcrumbs">
                 <span className="mr-2">
-                  <a href="index.html">
+                  <Link to="/">
                     Home <i className="ion-ios-arrow-forward"></i>
-                  </a>
+                  </Link>
                 </span>
                 <span>
                   Volunteers <i className="ion-ios-arrow-forward"></i>

@@ -16,9 +16,9 @@ import {
   typeInputContact,
   validationSchema,
 } from "./constants";
+import { Link } from "react-router-dom";
 
 function ContactPage() {
-
   const {
     handleSubmit,
     control,
@@ -35,8 +35,7 @@ function ContactPage() {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data: requestContact) => {
-  };
+  const onSubmit = (data: requestContact) => {};
   console.log("a");
 
   // render input
@@ -92,9 +91,9 @@ function ContactPage() {
             <div className="pb-5 col-md-9">
               <p className="mb-2 breadcrumbs">
                 <span className="mr-2">
-                  <a href="index.html">
+                  <Link to="/">
                     Home <i className="ion-ios-arrow-forward"></i>
-                  </a>
+                  </Link>
                 </span>{" "}
                 <span>
                   Contact us <i className="ion-ios-arrow-forward"></i>

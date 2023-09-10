@@ -68,7 +68,7 @@ function Footer() {
                 </li>
               </ul>
               <p>
-                <Link className="btn btn-quarternary" to="/donation">
+                <Link className="btn btn-quarternary" to="/program">
                   Donate Now
                 </Link>
               </p>

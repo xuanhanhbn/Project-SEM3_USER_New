@@ -14,6 +14,7 @@ import team3 from "assets/images/team/team-3.jpg";
 import team4 from "assets/images/team/team-4.jpg";
 import MultiCarousel from "react-multi-carousel";
 import { Link } from "react-router-dom";
+import CountUp from "react-countup";
 
 import { Carousel, Image } from "antd";
 import { useMutation } from "@tanstack/react-query";
@@ -145,7 +146,7 @@ const MainService = () => {
                 We're on a mission to help all your problems
               </h2>
 
-              <Link className="btn btn-white btn-outline-white" to="/donation">
+              <Link className="btn btn-white btn-outline-white" to="/program">
                 Donate Now
               </Link>
             </div>
@@ -155,7 +156,13 @@ const MainService = () => {
                   <div className="text-center block-18">
                     <div className="text">
                       <strong className="number" data-number="88984">
-                        0
+                        <CountUp
+                          enableScrollSpy
+                          className="number"
+                          start={0}
+                          end={6527}
+                          duration={2.75}
+                        />
                       </strong>
                     </div>
                     <div className="text">
@@ -167,7 +174,13 @@ const MainService = () => {
                   <div className="text-center block-18">
                     <div className="text">
                       <strong className="number" data-number="65000">
-                        0
+                        <CountUp
+                          enableScrollSpy
+                          className="number"
+                          start={0}
+                          end={1527}
+                          duration={2.75}
+                        />
                       </strong>
                     </div>
                     <div className="text">
@@ -179,7 +192,13 @@ const MainService = () => {
                   <div className="text-center block-18">
                     <div className="text">
                       <strong className="number" data-number="77000">
-                        0
+                        <CountUp
+                          enableScrollSpy
+                          className="number"
+                          start={0}
+                          end={711527}
+                          duration={2.75}
+                        />
                       </strong>
                     </div>
                     <div className="text">
@@ -191,7 +210,13 @@ const MainService = () => {
                   <div className="text-center block-18">
                     <div className="text">
                       <strong className="number" data-number="50">
-                        0
+                        <CountUp
+                          enableScrollSpy
+                          className="number"
+                          start={0}
+                          end={4527}
+                          duration={2.75}
+                        />
                       </strong>
                     </div>
                     <div className="text">
@@ -622,9 +647,9 @@ const MainService = () => {
             </div>
             <div className="col-md-4 col-lg-4 d-flex align-items-center justify-content-end">
               <p className="mb-0">
-                <a href="#" className="px-4 py-3 btn btn-primary">
+                <Link to="/program" className="px-4 py-3 btn btn-primary">
                   Become A Volunteer
-                </a>
+                </Link>
               </p>
             </div>
           </div>
