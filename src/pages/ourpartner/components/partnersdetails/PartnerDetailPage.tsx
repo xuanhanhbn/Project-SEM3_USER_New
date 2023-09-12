@@ -88,7 +88,7 @@ function PartnerDetailPage() {
               <div>
                 <div>
                   <div>
-                    <Image
+                    <img
                       style={{
                         maxHeight: "80px",
                         marginBottom: 10,
