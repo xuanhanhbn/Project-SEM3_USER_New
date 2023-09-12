@@ -32,6 +32,8 @@ function OurPartnerPage() {
   }, []);
 
   const handleReturnListPartner = (item: Partner) => {
+    console.log('item: ',item);
+
     return (
       <div key={item.partnerId} className="column">
         <div>
@@ -48,7 +50,7 @@ function OurPartnerPage() {
               />
               {/* <Image src="https://img1.oto.com.vn/Static/Images/logo/v3/mercedes-benz.png" alt="a" className="img w-100" /> */}
             </div>
-            <div>{item.name}</div>
+            <div style={{marginTop:30}}>{item.name}</div>
           </Link>
         </div>
       </div>

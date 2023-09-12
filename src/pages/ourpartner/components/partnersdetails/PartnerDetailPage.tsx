@@ -12,6 +12,7 @@ import { Divider, Image } from "antd";
 import { onGetPartnerDetailApi } from "./api";
 import { notify } from "utils/common";
 import { responsePartnerDetail } from "./type";
+import Loading from "components/Loading";
 
 function PartnerDetailPage() {
   const { partnerId } = useParams<RouterParams>();
@@ -20,7 +21,7 @@ function PartnerDetailPage() {
 
   const [itemDetails, setItemDetails] = useState<PartnerDetail>();
 
-  const { mutate: getListDetails } = useMutation(onGetListPartnerDetailsApi, {
+  const { mutate: getListDetails,isLoading } = useMutation(onGetListPartnerDetailsApi, {
     onSuccess: (data) => {
       setItemDetails(data);
     },
@@ -49,6 +50,7 @@ function PartnerDetailPage() {
 
   return (
     <>
+    <Loading isLoading={isLoading} />
       <section
         className="hero-wrap hero-wrap-2"
         style={{

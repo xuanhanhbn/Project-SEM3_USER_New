@@ -67,7 +67,7 @@ const MainService = () => {
               className="img w-100"
             />
             <div className="p-3 text">
-              <h2>
+              <h2 style={{height:'60px'}}>
                 <a href="">{item.name}</a>
               </h2>
               <p
