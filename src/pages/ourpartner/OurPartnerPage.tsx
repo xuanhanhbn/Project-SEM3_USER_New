@@ -10,15 +10,16 @@ import { notify } from "utils/common";
 import { Partner } from "types/global";
 import { responsePartnersList } from "./type";
 import { Image } from "antd";
+import Loading from "components/Loading";
 
 function OurPartnerPage() {
   // STATE
   const [listPartner, setListPartner] = useState<Partner[] | []>([]);
 
-  const { mutate: onGetListPartner } = useMutation(onGetListPartnerApi, {
+  const { mutate: onGetListPartner,isLoading } = useMutation(onGetListPartnerApi, {
     onSuccess: (data) => {
       if (data && data.status === 200) {
-        return setListPartner(data.data);
+        return setListPartner(data.data.data);
       }
     },
     onError: () => {
@@ -56,6 +57,7 @@ function OurPartnerPage() {
 
   return (
     <div>
+      <Loading isLoading={isLoading} />
       <section
         className="hero-wrap hero-wrap-2"
         style={{

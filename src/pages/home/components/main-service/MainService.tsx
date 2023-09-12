@@ -30,7 +30,7 @@ const MainService = () => {
   const { mutate: onGetListProgram } = useMutation(onGetListProgramApi, {
     onSuccess: (data) => {
       if (data && data.status === 200) {
-        return setListProgram(data.data);
+        return setListProgram(data.data.data);
       }
     },
     onError: () => {
@@ -46,8 +46,6 @@ const MainService = () => {
     const Percentage = 0;
     if (item?.target > 0 && item?.totalDonation > 0) {
       const Percentage = (item?.totalDonation / item?.target) * 100;
-
-      console.log("Percentage: ", Percentage);
 
       return Percentage;
     }

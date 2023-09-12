@@ -98,6 +98,7 @@ export interface ProgramDetail {
   donationReason: string[]
   target: number,
   endDate: string,
+  startDate:string,
   page: {
     pageId: string,
     pageType: string,

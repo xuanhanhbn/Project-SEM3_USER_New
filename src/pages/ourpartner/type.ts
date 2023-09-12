@@ -1,6 +1,11 @@
 export interface responsePartnersList<T> {
   status: number;
-  data: T[] | [];
+  data: {
+    data:T[],
+    page:number,
+    size:number,
+    total:number
+  }
 }
 
 export interface RouterParams {
