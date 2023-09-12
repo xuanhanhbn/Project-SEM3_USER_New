@@ -14797,3 +14797,7 @@ textarea.form-control {
 
   background-color: #18a577;
 }
+
+.ant-image {
+  width: 100%;
+}
