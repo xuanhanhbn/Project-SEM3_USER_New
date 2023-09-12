@@ -128,6 +128,23 @@ const MainService = () => {
             {Array.isArray(listProgram) &&
               listProgram.length > 0 &&
               listProgram.map((item) => handleReturnListProgram(item))}
+            <div>
+              <div
+                style={{ marginTop: 20, marginBottom: 80 }}
+                className="d-flex meta justify-content-center"
+              >
+                <div className="">
+                  <p className="mb-0">
+                    <Link
+                      to="/program"
+                      className="px-2 py-3 btn btn-secondary px-md-4"
+                    >
+                      View all programs
+                    </Link>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
