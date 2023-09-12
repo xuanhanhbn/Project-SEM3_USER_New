@@ -147,6 +147,7 @@ const routes = [
         path: paths.payment,
         component: lazy(() => import("pages/paymentstatus/PaymentStatusPage")),
       },
+
     ],
   },
 ];

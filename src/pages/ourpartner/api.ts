@@ -15,8 +15,6 @@ export const onGetListPartnerApi = (): Promise<
 };
 
 export const onGetListPartnerDetailsApi = (data:RouterParams): Promise<PartnerDetail> => {
-  console.log('data: ',data);
-
   const url = `Partner/${data?.partnerId}`;
   return new Promise((resolve, reject) =>
     baseApiAuth

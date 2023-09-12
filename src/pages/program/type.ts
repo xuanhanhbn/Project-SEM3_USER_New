@@ -17,5 +17,10 @@ export interface responseDataCausesList {
 
 export interface responseProgram<T> {
   status: number;
-  data: T[] | [];
+  data: {
+    data:T[],
+    page:number,
+    size:number,
+    total:number
+  };
 }

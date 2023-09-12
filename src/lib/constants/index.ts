@@ -19,5 +19,5 @@ export const paths = {
   activeCode: "/forgot-password/active-code",
   resetPassword: "/forgot-password/reset-password",
   resetSuccess: "/forgot-password/success",
-  payment: "/payment",
+  payment: "/Payment/checkStatusPayment/:donationId",
 };

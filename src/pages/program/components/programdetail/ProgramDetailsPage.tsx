@@ -2,8 +2,8 @@ import bg from "assets/images/gallery/page-title-bg-1.jpg";
 import BlankUser from "assets/images/team/BlankUser2.png";
 import React, { useEffect, useState } from "react";
 import "./css.css";
-import { Link, useHistory, useParams, } from "react-router-dom";
-import { Image, InputNumber, Modal, Spin } from "antd";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { Dropdown, Image, Input, InputNumber, Modal, Space, Spin } from "antd";
 import moment from "moment";
 import RealTime from "components/RealTime";
 import { RouteParams } from "pages/program/type";
@@ -12,6 +12,7 @@ import { ProgramDetail } from "types/global";
 import { useMutation } from "@tanstack/react-query";
 import { ShareAltOutlined } from "@ant-design/icons";
 import { useForm, Controller } from "react-hook-form";
+import LogoGmail from "assets/images/logo/google-logo.png";
 
 import {
   DataRequestInput,
@@ -24,16 +25,39 @@ import { onPaymentApi, onRegisterVolunteerApi } from "./api";
 import { notify } from "utils/common";
 import { Button } from "@mui/material";
 import Loading from "components/Loading";
+import type { MenuProps } from "antd";
+import ModalShare from "./components/ModalShare/ModalShare";
+import { requestInput } from "./components/ModalShare/type";
 
 function CauseDetailsPage() {
-  const history = useHistory()
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: (
+        <Button onClick={() => setIsOpenModalShare(true)}>
+          <div className="d-flex justify-content-center aligin-items-center">
+            <img
+              src={LogoGmail}
+              alt="image_logo_gmail"
+              style={{ width: 20, height: 20 }}
+            />
+            <div className="ml-2">Gmail</div>
+          </div>
+        </Button>
+      ),
+    },
+  ];
+
+  const history = useHistory();
 
   const { programId } = useParams<RouteParams>();
   const sliceString = programId?.replace("programId=", "");
 
   const [itemDetails, setItemDetails] = useState<ProgramDetail>();
-  const [isOpenModalVolunteer,setIsOpenModalVolunteer] = useState<boolean>(false)
-  const [isCheckEnroll,setIsCheckEnroll] = useState<boolean>(false)
+  const [isOpenModalVolunteer, setIsOpenModalVolunteer] =
+    useState<boolean>(false);
+  const [isCheckEnroll, setIsCheckEnroll] = useState<boolean>(false);
+  const [isOpenModalShare, setIsOpenModalShare] = useState<boolean>(false);
 
   const {
     handleSubmit,
@@ -44,12 +68,12 @@ function CauseDetailsPage() {
     criteriaMode: "all",
     defaultValues: {
       reason: "",
-      amount: '',
+      amount: "",
     },
     resolver: yupResolver(validationSchema),
   });
 
-  const { mutate: getListDetails,isLoading } = useMutation(getProgramDetails, {
+  const { mutate: getListDetails, isLoading } = useMutation(getProgramDetails, {
     onSuccess: (data) => {
       setItemDetails(data);
     },
@@ -57,14 +81,15 @@ function CauseDetailsPage() {
   });
 
   useEffect(() => {
-    if(itemDetails) {
-      if(itemDetails?.currentUserEnrollment?.programId === itemDetails?.programId) {
-        return setIsCheckEnroll(true)
+    if (itemDetails) {
+      if (
+        itemDetails?.currentUserEnrollment?.programId === itemDetails?.programId
+      ) {
+        return setIsCheckEnroll(true);
       }
-      return setIsCheckEnroll(false)
-
+      return setIsCheckEnroll(false);
     }
-  },[itemDetails])
+  }, [itemDetails]);
 
   useEffect(() => {
     if (sliceString) {
@@ -109,52 +134,48 @@ function CauseDetailsPage() {
 
   const { mutate: onRegisterVolunteer } = useMutation(onRegisterVolunteerApi, {
     onSuccess: (data) => {
-      setIsOpenModalVolunteer(false)
-      getListDetails({ programId: sliceString })
+      setIsOpenModalVolunteer(false);
+      getListDetails({ programId: sliceString });
 
-      return notify("Register Success ",'success');
-
+      return notify("Register Success ", "success");
     },
     onError: () => {
-      return notify("An error occurred, please try again ",'error');
+      return notify("An error occurred, please try again ", "error");
     },
   });
-
 
   const { mutate: onDonationMutation } = useMutation(onPaymentApi, {
     onSuccess: (data) => {
-    const urlPayPal = document.createElement('a');
-    // Đặt thuộc tính href của thẻ <a> thành URL mà bạn muốn chuyển đến
-    urlPayPal.href = data?.href;
-    // Đặt thuộc tính target để mở liên kết trong cửa sổ mới
-    urlPayPal.target = '_parent';
-    urlPayPal.click()
-
+      const urlPayPal = document.createElement("a");
+      // Đặt thuộc tính href của thẻ <a> thành URL mà bạn muốn chuyển đến
+      urlPayPal.href = data?.href;
+      // Đặt thuộc tính target để mở liên kết trong cửa sổ mới
+      urlPayPal.target = "_parent";
+      urlPayPal.click();
     },
     onError: () => {
-      return notify("An error occurred, please try again ",'error');
+      return notify("An error occurred, please try again ", "error");
     },
   });
 
-
-  const onSubmit = (data: DataRequestInput):void => {
+  const onSubmit = (data: DataRequestInput): void => {
     const newDataRequest = {
       ...data,
       programId: `${sliceString}`,
-      amount:Number(data.amount)
+      amount: Number(data.amount),
     };
 
-    return onDonationMutation(newDataRequest)
+    return onDonationMutation(newDataRequest);
   };
 
   const handleRegisterVolunteer = () => {
-
     onRegisterVolunteer({
       programId: sliceString,
-
-    })
+    });
+  };
+  const handleCloseModal = ():void => {
+    setIsOpenModalShare(false)
   }
-
 
   // render input
   const renderInput = (item: typeInputDonate) => {
@@ -241,7 +262,7 @@ function CauseDetailsPage() {
 
   return (
     <div>
-    <Loading isLoading={isLoading}/>
+      <Loading isLoading={isLoading} />
       <section
         className="hero-wrap hero-wrap-2"
         style={{
@@ -255,18 +276,12 @@ function CauseDetailsPage() {
             <div className="pb-5 col-md-9">
               <p className="mb-2 breadcrumbs">
                 <span className="mr-2">
-                  <a href="/">
-                    {`Home >`}
-                  </a>
+                  <a href="/">{`Home >`}</a>
                 </span>
                 <span className="mr-2">
-                  <a href="/program">
-                    {`Program List >`}
-                  </a>
+                  <a href="/program">{`Program List >`}</a>
                 </span>
-                <span>
-                  {`Program Details `}
-                </span>
+                <span>{`Program Details `}</span>
               </p>
               <h1 className="mb-0 bread">Program Details</h1>
             </div>
@@ -324,49 +339,63 @@ function CauseDetailsPage() {
                 <p>{itemDetails?.description}</p>
 
                 <div className="justify-content-between cause-card__bottom d-flex mb-5">
-                    <Button  disabled={isCheckEnroll} className="px-4 py-3 btn btn-primary rounded" onClick={() => setIsOpenModalVolunteer(true) } >
-                      Become A Volunteer
-                    </Button>
+                  <Button
+                    disabled={isCheckEnroll}
+                    className="px-4 py-3 btn btn-primary rounded"
+                    onClick={() => setIsOpenModalVolunteer(true)}
+                  >
+                    Become A Volunteer
+                  </Button>
                   <p>
-                    <Link
-                      style={{ border: "1px solid" }}
-                      className="py-3 btn "
-                      to="#"
-                    >
-                      Share <ShareAltOutlined />
-                    </Link>
+                    <Dropdown menu={{ items }} className="py-3 btn ">
+                      <a
+                        className="py-3 btn "
+                        onClick={(e) => e.preventDefault()}
+                        style={{ border: "1px solid" }}
+                      >
+                        <Space>
+                          Share
+                          <ShareAltOutlined />
+                        </Space>
+                      </a>
+                    </Dropdown>
                   </p>
                 </div>
               </div>
-                {isCheckEnroll && (
-
-              <div id='containerDonate' style={{ backgroundColor: "#198754", borderRadius: "10px" }}>
-                <form onSubmit={handleSubmit(onSubmit)} className="appointment">
-                  <div className="row">
-                    {inputHomeDonate.map((input) => (
-                      <div key={input.field}>{renderInput(input)}</div>
-                    ))}
-                    <div className="">
-                      <div className="form-group">
-                        <Button
-                        disabled={isLoading}
-                          type="submit"
-                          className="px-4 py-3 btn btn-secondary"
-                        >
-                          {isLoading ? <Spin /> : <div>Donate Now</div>}
-                        </Button>
+              {isCheckEnroll && (
+                <div
+                  id="containerDonate"
+                  style={{ backgroundColor: "#198754", borderRadius: "10px" }}
+                >
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="appointment"
+                  >
+                    <div className="row">
+                      {inputHomeDonate.map((input) => (
+                        <div key={input.field}>{renderInput(input)}</div>
+                      ))}
+                      <div className="">
+                        <div className="form-group">
+                          <Button
+                            disabled={isLoading}
+                            type="submit"
+                            className="px-4 py-3 btn btn-secondary"
+                          >
+                            {isLoading ? <Spin /> : <div>Donate Now</div>}
+                          </Button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </form>
-              </div>
-                 )}
+                  </form>
+                </div>
+              )}
 
               <div className="result" />
             </div>
             <div className="col-lg-4 col-md-12">
               <div className="cause-details__sidebar">
-              <h4 className="cause-details__donations-title">Create By</h4>
+                <h4 className="cause-details__donations-title">Create By</h4>
 
                 <div className="cause-details__organizer">
                   <img
@@ -377,11 +406,14 @@ function CauseDetailsPage() {
                   <p>{`Created: ${moment(itemDetails?.createdAt).format(
                     "YYYY-MM-DD"
                   )}`}</p>
-                  <h3>
+                  <p>{`Start Date: ${moment(itemDetails?.startDate).format(
+                    "YYYY-MM-DD"
+                  )}`}</p>
+                  <p>
                     Organizer: <strong>{itemDetails?.createdByName}</strong>
-                  </h3>
+                  </p>
                 </div>
-                  <h4 className="cause-details__donations-title">Donations</h4>
+                <h4 className="cause-details__donations-title">Donations</h4>
                 <div className="cause-details__donations">
                   <ul className="list-unstyled cause-details__donations-list">
                     {itemDetails?.enrollments.map((itemEnroll) => (
@@ -405,9 +437,25 @@ function CauseDetailsPage() {
       </section>
 
       {isOpenModalVolunteer && (
-         <Modal title="Register Volunteer" open={isOpenModalVolunteer} onOk={() => handleRegisterVolunteer()} onCancel={() => setIsOpenModalVolunteer(false)}>
-         <p>Are you sure you want to register for this program? By registering, you will have access to the program's activities and contribute to it.</p>
-       </Modal>
+        <Modal
+          title="Register Volunteer"
+          open={isOpenModalVolunteer}
+          onOk={() => handleRegisterVolunteer()}
+          onCancel={() => setIsOpenModalVolunteer(false)}
+        >
+          <p>
+            Are you sure you want to register for this program? By registering,
+            you will have access to the program's activities and contribute to
+            it.
+          </p>
+        </Modal>
+      )}
+      {isOpenModalShare && (
+      <ModalShare
+      isOpenModalShare={isOpenModalShare}
+      handleCloseModal={handleCloseModal}
+      itemDetails={itemDetails}
+       />
       )}
     </div>
   );
